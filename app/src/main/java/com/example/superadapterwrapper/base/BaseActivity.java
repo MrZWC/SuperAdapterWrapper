@@ -1,5 +1,6 @@
 package com.example.superadapterwrapper.base;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.view.View;
@@ -15,8 +16,8 @@ import androidx.appcompat.app.AppCompatActivity;
  */
 public abstract class BaseActivity extends AppCompatActivity {
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView();
         initView();
         initData(savedInstanceState);
@@ -52,5 +53,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     public <T extends View> T getView(int viewId) {
         View view = findViewById(viewId);
         return (T) view;
+    }
+    public Context getContext() {
+        return this;
     }
 }
