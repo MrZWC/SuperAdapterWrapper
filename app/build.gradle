@@ -29,5 +29,8 @@ dependencies {
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0'
     //svga支持
     implementation 'com.github.yyued:SVGAPlayer-Android:2.1.10'
+    implementation 'com.zhy:base-rvadapter:3.0.3'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation project(path: ':layoutmanagerlib')
 
 }
