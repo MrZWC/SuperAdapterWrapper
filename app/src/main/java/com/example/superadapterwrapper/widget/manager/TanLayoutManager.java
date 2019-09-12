@@ -1,6 +1,5 @@
 package com.example.superadapterwrapper.widget.manager;
 
-import android.util.Log;
 import android.view.View;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,7 +15,6 @@ import java.util.List;
  * Time: 11:00
  */
 public class TanLayoutManager extends RecyclerView.LayoutManager {
-    private int maxCount = 3;
 
     @Override
     public RecyclerView.LayoutParams generateDefaultLayoutParams() {
@@ -36,7 +34,7 @@ public class TanLayoutManager extends RecyclerView.LayoutManager {
         // 分离全部已有的view 放入临时缓存  mAttachedScrap 集合中
         detachAndScrapAttachedViews(recycler);
 
-        fill(recycler, state, 0);
+        fill(recycler, state);
     }
 
     @Override
@@ -49,10 +47,9 @@ public class TanLayoutManager extends RecyclerView.LayoutManager {
         return super.scrollVerticallyBy(dy, recycler, state);
     }
 
-    private void fill(RecyclerView.Recycler recycler, RecyclerView.State state, int dx) {
-        int resultDelta = dx;
+    private void fill(RecyclerView.Recycler recycler, RecyclerView.State state) {
         drawView(recycler, state);
-        //recycleChildren(recycler);
+        recycleChildren(recycler);
     }
 
     /**
@@ -103,31 +100,4 @@ public class TanLayoutManager extends RecyclerView.LayoutManager {
             view.setScaleY(1 - position * CardConfig.DEFAULT_SCALE);
         }
     }
-
-    @Override
-    public void smoothScrollToPosition(RecyclerView recyclerView, RecyclerView.State state, int position) {
-        Log.i("testscroll", "success");
-        if (position != 0 && position <= getItemCount() && position >= 0) {
-            //smoothScrollNext(position);
-        }
-    }
-
-  /*  private void smoothScrollNext(int position) {
-        View view = findViewByPosition(0);
-        int top = view != null ? view.getTop() : 0;
-        int left = view != null ? view.getLeft() : 0;
-        int[] downPosition = mCardSwipeController.getDownPosition();
-        if (downPosition != null && downPosition.length == 2 && downPosition[0] != -1 && downPosition[1] != -1) {
-            setDownPoint(view, downPosition[0], downPosition[1]);
-        } else {
-            Random random = new Random();
-            setDownPoint(view, random.nextInt(view != null ? view.getWidth() : getWidth()) + left, random.nextInt(view != null ?
-                    view.getHeight() : getHeight()) + top);
-        }
-        mTargetPosition = position;
-        CardSmoothScroller scroller = new CardSmoothScroller(mCardSwipeController);
-        scroller.prepareNext(mTopPosition, this);
-        startSmoothScroll(scroller);
-        mAnimPre = false;
-    }*/
 }

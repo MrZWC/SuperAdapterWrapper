@@ -3,7 +3,6 @@ package com.example.superadapterwrapper.widget.manager;
 import android.graphics.Canvas;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -46,7 +45,7 @@ public class TanTouchCallBack<T> extends ItemTouchHelper.Callback {
         int layoutPosition = viewHolder.getLayoutPosition();
         tList.remove(layoutPosition);
         mRv.getAdapter().notifyDataSetChanged();
-        Toast.makeText(mRv.getContext(), "direction=" + direction, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(mRv.getContext(), "direction=" + direction, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -107,6 +106,7 @@ public class TanTouchCallBack<T> extends ItemTouchHelper.Callback {
     @Override
     public void clearView(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
         super.clearView(recyclerView, viewHolder);
+        Log.i("clearView", "success");
         viewHolder.itemView.setRotation(0f);
     }
 
