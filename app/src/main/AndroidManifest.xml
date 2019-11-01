@@ -9,9 +9,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".moudle.TanActivity"></activity>
-        <activity android:name=".moudle.SvgaActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".moudle.XfermodeActivity"></activity>
+        <activity android:name=".moudle.ShadowActivity" />
+        <activity
+            android:name=".moudle.LikeAnimationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".moudle.TanActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".moudle.SvgaActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

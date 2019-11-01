@@ -3,12 +3,15 @@ package com.example.superadapterwrapper.widget.manager;
 import android.graphics.Canvas;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.superadapterwrapper.R;
 import com.example.superadapterwrapper.common.CardConfig;
 
 import java.util.List;
@@ -30,8 +33,12 @@ public class TanTouchCallBack<T> extends ItemTouchHelper.Callback {
 
     @Override
     public int getMovementFlags(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
+        int itemCount = recyclerView.getAdapter().getItemCount();
         int dragFlags = 0;//这个是拖动的flag
-        int swipeFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN | ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT;
+        int swipeFlags = ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT;
+        if (itemCount <= 1) {
+            swipeFlags = 0;
+        }
         return makeMovementFlags(dragFlags, swipeFlags);
     }
 
@@ -42,7 +49,7 @@ public class TanTouchCallBack<T> extends ItemTouchHelper.Callback {
 
     @Override
     public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-        int layoutPosition = viewHolder.getLayoutPosition();
+        int layoutPosition = viewHolder.getAdapterPosition();
         tList.remove(layoutPosition);
         mRv.getAdapter().notifyDataSetChanged();
         //Toast.makeText(mRv.getContext(), "direction=" + direction, Toast.LENGTH_SHORT).show();
@@ -51,7 +58,7 @@ public class TanTouchCallBack<T> extends ItemTouchHelper.Callback {
     @Override
     public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
         super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
-        View itemView = viewHolder.itemView;
+        ViewGroup itemView = (ViewGroup)viewHolder.itemView;
         if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
             float ratio = dX / getThreshold(recyclerView, viewHolder);
             // ratio 最大为 1 或 -1
@@ -114,5 +121,11 @@ public class TanTouchCallBack<T> extends ItemTouchHelper.Callback {
     public void onSelectedChanged(@Nullable RecyclerView.ViewHolder viewHolder, int actionState) {
         Log.i("onSelectedChanged", actionState + "");
         super.onSelectedChanged(viewHolder, actionState);
+    }
+
+    @Override
+    public void onChildDrawOver(@NonNull Canvas c, @NonNull RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
+        super.onChildDrawOver(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+
     }
 }

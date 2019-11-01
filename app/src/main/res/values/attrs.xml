@@ -1,0 +1,9 @@
+<resources>
+
+    <declare-styleable name="StrokeTextView">
+        <attr name="border_color" format="color" />
+        <attr name="stroke_width" format="dimension" />
+    </declare-styleable>
+
+</resources>
+

@@ -28,6 +28,7 @@ import java.util.List;
 
 import static android.view.MotionEvent.ACTION_DOWN;
 
+//探探滑动效果
 public class TanActivity extends BaseActivity {
     private RecyclerView mRecyclerView;
     private CardView cardView;
@@ -58,7 +59,7 @@ public class TanActivity extends BaseActivity {
     @Override
     protected void initData(Bundle savedInstanceState) {
         List<String> list = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 100; i++) {
             list.add("数据源" + i);
         }
         mAdapter = new CommonAdapter<String>(this, R.layout.item_tan_layout, list) {
@@ -215,5 +216,4 @@ public class TanActivity extends BaseActivity {
             }
         });
     }
-
 }
