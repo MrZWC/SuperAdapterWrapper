@@ -3,6 +3,8 @@ package com.example.superadapterwrapper.util;
 import android.content.Context;
 import android.util.TypedValue;
 
+import com.example.superadapterwrapper.SuperAppliction;
+
 
 /**
  * 单位转换工具
@@ -22,10 +24,10 @@ public class DensityUtils {
                 dpVal, context.getResources().getDisplayMetrics());
     }
 
-    /*public static int dp2px(float dpVal) {
+    public static int dp2px(float dpVal) {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
-                dpVal, KQApplication.getApp().getResources().getDisplayMetrics());
-    }*/
+                dpVal, SuperAppliction.getApp().getResources().getDisplayMetrics());
+    }
 
     /**
      * sp转px

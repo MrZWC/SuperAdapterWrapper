@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.superadapterwrapper.adapter.MainAdapter;
 import com.example.superadapterwrapper.base.BaseActivity;
+import com.example.superadapterwrapper.moudle.ItemAnimatorActivity;
 import com.example.superadapterwrapper.moudle.LikeAnimationActivity;
 import com.example.superadapterwrapper.moudle.ShadowActivity;
 import com.example.superadapterwrapper.moudle.SvgaActivity;
@@ -42,6 +43,7 @@ public class MainActivity extends BaseActivity {
         strings.add("喜欢点击动画");
         strings.add("view阴影");
         strings.add("XfermodeTest");
+        strings.add("自定义RecycleView动画");
         ShowDataView();
     }
 
@@ -75,6 +77,9 @@ public class MainActivity extends BaseActivity {
                         break;
                     case 4:
                         XfermodeActivity.start(getContext());
+                        break;
+                    case 5:
+                        ItemAnimatorActivity.start(getContext());
                         break;
                     default:
                 }
