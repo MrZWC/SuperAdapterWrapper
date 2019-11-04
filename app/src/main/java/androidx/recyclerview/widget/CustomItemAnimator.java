@@ -72,6 +72,7 @@ public class CustomItemAnimator extends SimpleItemAnimator {
     private static class ChangeInfo {
         public RecyclerView.ViewHolder oldHolder, newHolder;
         public int fromX, fromY, toX, toY;
+
         private ChangeInfo(RecyclerView.ViewHolder oldHolder, RecyclerView.ViewHolder newHolder) {
             this.oldHolder = oldHolder;
             this.newHolder = newHolder;
@@ -221,7 +222,7 @@ public class CustomItemAnimator extends SimpleItemAnimator {
     }
 
     public long getRemoveDuration() {
-        return 400L;
+        return 500L;
     }
 
     public long getMoveDuration() {
@@ -230,6 +231,9 @@ public class CustomItemAnimator extends SimpleItemAnimator {
 
     private void animateRemoveImpl(final RecyclerView.ViewHolder holder) {
         final View view = holder.itemView;
+        view.setAlpha(1f);
+        view.setScaleX(1f);
+        view.setScaleY(1f);
         final ViewPropertyAnimator animation = view.animate();
         mRemoveAnimations.add(holder);
         animation.setDuration(getRemoveDuration())
@@ -237,29 +241,39 @@ public class CustomItemAnimator extends SimpleItemAnimator {
                 .scaleX(0f)
                 .scaleY(0f)
                 .setListener(
-                new AnimatorListenerAdapter() {
-                    @Override
-                    public void onAnimationStart(Animator animator) {
-                        dispatchRemoveStarting(holder);
-                    }
+                        new AnimatorListenerAdapter() {
+                            @Override
+                            public void onAnimationStart(Animator animator) {
+                                dispatchRemoveStarting(holder);
+                            }
 
-                    @Override
-                    public void onAnimationEnd(Animator animator) {
-                        animation.setListener(null);
-                        view.setAlpha(1);
-                        view.setScaleX(1f);
-                        view.setScaleY(1f);
-                        dispatchRemoveFinished(holder);
-                        mRemoveAnimations.remove(holder);
-                        dispatchFinishedWhenDone();
-                    }
-                }).start();
+                            @Override
+                            public void onAnimationCancel(Animator animation) {
+                                view.setAlpha(1);
+                                view.setScaleX(1f);
+                                view.setScaleY(1f);
+                                mRemoveAnimations.remove(holder);
+                            }
+
+                            @Override
+                            public void onAnimationEnd(Animator animator) {
+                                animation.setListener(null);
+                                view.setAlpha(1);
+                                view.setScaleX(1f);
+                                view.setScaleY(1f);
+                                dispatchRemoveFinished(holder);
+                                mRemoveAnimations.remove(holder);
+                                dispatchFinishedWhenDone();
+                            }
+                        }).start();
     }
 
     @Override
     public boolean animateAdd(final RecyclerView.ViewHolder holder) {
         resetAnimation(holder);
         holder.itemView.setAlpha(0);
+        holder.itemView.setScaleX(0);
+        holder.itemView.setScaleY(0);
         mPendingAdditions.add(holder);
         return true;
     }
@@ -268,9 +282,10 @@ public class CustomItemAnimator extends SimpleItemAnimator {
         final View view = holder.itemView;
         final ViewPropertyAnimator animation = view.animate();
         mAddAnimations.add(holder);
-        animation.alpha(1)
-                .scaleX(1)
-                .scaleY(1).setDuration(getAddDuration())
+        animation.alpha(1f)
+                .scaleX(1f)
+                .scaleY(1f)
+                .setDuration(getAddDuration())
                 .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationStart(Animator animator) {
@@ -279,19 +294,28 @@ public class CustomItemAnimator extends SimpleItemAnimator {
 
                     @Override
                     public void onAnimationCancel(Animator animator) {
-                        view.setAlpha(1);
+                        view.setAlpha(1f);
                         view.setScaleY(1f);
                         view.setScaleY(1f);
+                        mAddAnimations.remove(holder);
                     }
 
                     @Override
                     public void onAnimationEnd(Animator animator) {
+                        view.setAlpha(1f);
+                        view.setScaleY(1f);
+                        view.setScaleY(1f);
                         animation.setListener(null);
                         dispatchAddFinished(holder);
                         mAddAnimations.remove(holder);
                         dispatchFinishedWhenDone();
                     }
                 }).start();
+    }
+
+    @Override
+    public long getAddDuration() {
+        return 300;
     }
 
     @Override
@@ -425,6 +449,7 @@ public class CustomItemAnimator extends SimpleItemAnimator {
                 public void onAnimationStart(Animator animator) {
                     dispatchChangeStarting(changeInfo.newHolder, false);
                 }
+
                 @Override
                 public void onAnimationEnd(Animator animator) {
                     newViewAnimation.setListener(null);
@@ -458,6 +483,7 @@ public class CustomItemAnimator extends SimpleItemAnimator {
             endChangeAnimationIfNecessary(changeInfo, changeInfo.newHolder);
         }
     }
+
     private boolean endChangeAnimationIfNecessary(ChangeInfo changeInfo, RecyclerView.ViewHolder item) {
         boolean oldItem = false;
         if (changeInfo.newHolder == item) {

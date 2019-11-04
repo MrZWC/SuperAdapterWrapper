@@ -10,7 +10,8 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.CustomItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.PagerSnapHelper;
+import androidx.recyclerview.widget.LinearSnapHelper;
+import androidx.recyclerview.widget.MyLinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.superadapterwrapper.R;
@@ -29,7 +30,7 @@ public class ItemAnimatorActivity extends BaseActivity implements View.OnClickLi
     private AnimatorAdapter mAdapter;
     private List<String> mData;
     private int itemDecoration;
-    private PagerSnapHelper pagerSnapHelper;
+    private LinearSnapHelper pagerSnapHelper;
     private FadeItemAnimator fadeItemAnimator;
 
     public static void start(Context context) {
@@ -52,14 +53,11 @@ public class ItemAnimatorActivity extends BaseActivity implements View.OnClickLi
     @Override
     protected void initData(Bundle savedInstanceState) {
         itemDecoration = DensityUtils.dp2px(getContext(), 12);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        MyLinearLayoutManager linearLayoutManager = new MyLinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        mRecyclerView.setLayoutManager(linearLayoutManager);
         fadeItemAnimator = new FadeItemAnimator();
-        fadeItemAnimator.setAnimatiorStateListener(new FadeItemAnimator.AnimatiorStateListener() {
-            @Override
-            public void addAnimationStart() {
-                // mRecyclerView.scrollToPosition(mAdapter.getItemCount() - 1);
-            }
-        });
+        //
+        //mRecyclerView.setItemAnimator(fadeItemAnimator);
         mRecyclerView.setItemAnimator(new CustomItemAnimator());
         mRecyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
             @Override
@@ -75,7 +73,7 @@ public class ItemAnimatorActivity extends BaseActivity implements View.OnClickLi
      /*   LinearSnapHelper linearSnapHelper = new LinearSnapHelper();
         linearSnapHelper.attachToRecyclerView(mRecyclerView);
 */
-        pagerSnapHelper = new PagerSnapHelper();
+        pagerSnapHelper = new LinearSnapHelper();
         pagerSnapHelper.attachToRecyclerView(mRecyclerView);
         mData = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
@@ -99,7 +97,12 @@ public class ItemAnimatorActivity extends BaseActivity implements View.OnClickLi
                 mAdapter.notifyItemInserted(mAdapter.getItemCount() - 1);
                /* mData.add(mData.size() - 1, "我是添加的" + mData.size());
                 mAdapter.notifyItemInserted(mAdapter.getItemCount() - 2);*/
-                mRecyclerView.scrollToPosition(mAdapter.getItemCount() - 1);
+                mRecyclerView.postOnAnimation(new Runnable() {
+                    @Override
+                    public void run() {
+                        mRecyclerView.smoothScrollToPosition(mAdapter.getItemCount() - 1);
+                    }
+                });
                 break;
             case R.id.remove_bt:
                 mData.remove(mData.size() - 1);

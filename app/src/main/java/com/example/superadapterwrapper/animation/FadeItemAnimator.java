@@ -22,6 +22,8 @@ public class FadeItemAnimator extends BaseItemAnimator {
     @Override
     public void setRemoveAnimation(RecyclerView.ViewHolder holder, ViewPropertyAnimatorCompat animator) {
         animator.alpha(0);
+        animator.scaleX(0f);
+        animator.scaleY(0f);
     }
 
     /**
@@ -31,7 +33,9 @@ public class FadeItemAnimator extends BaseItemAnimator {
      */
     @Override
     public void removeAnimationEnd(RecyclerView.ViewHolder view) {
-        view.itemView.setAlpha(1);
+        view.itemView.setAlpha(1f);
+        view.itemView.setScaleX(1f);
+        view.itemView.setScaleY(1f);
     }
 
     /**
@@ -57,25 +61,6 @@ public class FadeItemAnimator extends BaseItemAnimator {
         animator.alpha(1);
         animator.scaleX(1f);
         animator.scaleY(1f);
-        animator.translationX(-100f);
-        animator.setListener(new ViewPropertyAnimatorListener() {
-            @Override
-            public void onAnimationStart(View view) {
-              /*  if (animatiorStateListener != null) {
-                    animatiorStateListener.addAnimationStart();
-                }*/
-            }
-
-            @Override
-            public void onAnimationEnd(View view) {
-
-            }
-
-            @Override
-            public void onAnimationCancel(View view) {
-
-            }
-        });
     }
 
     /**
@@ -156,5 +141,10 @@ public class FadeItemAnimator extends BaseItemAnimator {
 
     public interface AnimatiorStateListener {
         void addAnimationStart();
+    }
+
+    @Override
+    public long getAddDuration() {
+        return super.getAddDuration();
     }
 }
