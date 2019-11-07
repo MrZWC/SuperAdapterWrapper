@@ -57,8 +57,8 @@ public class ItemAnimatorActivity extends BaseActivity implements View.OnClickLi
         mRecyclerView.setLayoutManager(linearLayoutManager);
         fadeItemAnimator = new FadeItemAnimator();
         //
-        //mRecyclerView.setItemAnimator(fadeItemAnimator);
-        mRecyclerView.setItemAnimator(new CustomItemAnimator());
+        mRecyclerView.setItemAnimator(fadeItemAnimator);
+        //mRecyclerView.setItemAnimator(new CustomItemAnimator());
         mRecyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
             @Override
             public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
