@@ -4,6 +4,9 @@
         <attr name="border_color" format="color" />
         <attr name="stroke_width" format="dimension" />
     </declare-styleable>
+    <declare-styleable name="CircleView">
+        <attr name="bg_color" format="color" />
+    </declare-styleable>
 
 </resources>
 

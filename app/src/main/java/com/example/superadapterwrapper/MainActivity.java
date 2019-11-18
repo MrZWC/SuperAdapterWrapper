@@ -12,6 +12,7 @@ import com.example.superadapterwrapper.adapter.MainAdapter;
 import com.example.superadapterwrapper.base.BaseActivity;
 import com.example.superadapterwrapper.moudle.ItemAnimatorActivity;
 import com.example.superadapterwrapper.moudle.LikeAnimationActivity;
+import com.example.superadapterwrapper.moudle.RecyclerBannerActivity;
 import com.example.superadapterwrapper.moudle.ShadowActivity;
 import com.example.superadapterwrapper.moudle.SvgaActivity;
 import com.example.superadapterwrapper.moudle.TanActivity;
@@ -44,6 +45,7 @@ public class MainActivity extends BaseActivity {
         strings.add("view阴影");
         strings.add("XfermodeTest");
         strings.add("自定义RecycleView动画");
+        strings.add("RecycleView轮播实现");
         ShowDataView();
     }
 
@@ -80,6 +82,9 @@ public class MainActivity extends BaseActivity {
                         break;
                     case 5:
                         ItemAnimatorActivity.start(getContext());
+                        break;
+                    case 6:
+                        RecyclerBannerActivity.start(getContext());
                         break;
                     default:
                 }

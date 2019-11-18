@@ -4,11 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.CustomItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.MyLinearLayoutManager;
@@ -30,7 +30,6 @@ public class ItemAnimatorActivity extends BaseActivity implements View.OnClickLi
     private AnimatorAdapter mAdapter;
     private List<String> mData;
     private int itemDecoration;
-    private LinearSnapHelper pagerSnapHelper;
     private FadeItemAnimator fadeItemAnimator;
 
     public static void start(Context context) {
@@ -53,7 +52,7 @@ public class ItemAnimatorActivity extends BaseActivity implements View.OnClickLi
     @Override
     protected void initData(Bundle savedInstanceState) {
         itemDecoration = DensityUtils.dp2px(getContext(), 12);
-        MyLinearLayoutManager linearLayoutManager = new MyLinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        final MyLinearLayoutManager linearLayoutManager = new MyLinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         mRecyclerView.setLayoutManager(linearLayoutManager);
         fadeItemAnimator = new FadeItemAnimator();
         //
@@ -66,27 +65,39 @@ public class ItemAnimatorActivity extends BaseActivity implements View.OnClickLi
                 if (position != 0) {
                     outRect.left = itemDecoration;
                 }
-
-
             }
         });
-     /*   LinearSnapHelper linearSnapHelper = new LinearSnapHelper();
+        LinearSnapHelper linearSnapHelper = new LinearSnapHelper();
         linearSnapHelper.attachToRecyclerView(mRecyclerView);
-*/
-        pagerSnapHelper = new LinearSnapHelper();
-        pagerSnapHelper.attachToRecyclerView(mRecyclerView);
+        /*PagerSnapHelper pagerSnapHelper = new PagerSnapHelper();
+        pagerSnapHelper.attachToRecyclerView(mRecyclerView);*/
         mData = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
             mData.add(i + "");
         }
         mAdapter = new AnimatorAdapter(getContext(), mData);
         mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    Log.i("positionNum", linearLayoutManager.findFirstVisibleItemPosition() + "");
+                }
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+            }
+        });
     }
 
     @Override
     protected void initLinstener() {
         addBt.setOnClickListener(this);
         removeBt.setOnClickListener(this);
+
     }
 
     @Override
@@ -97,6 +108,7 @@ public class ItemAnimatorActivity extends BaseActivity implements View.OnClickLi
                 mAdapter.notifyItemInserted(mAdapter.getItemCount() - 1);
                /* mData.add(mData.size() - 1, "我是添加的" + mData.size());
                 mAdapter.notifyItemInserted(mAdapter.getItemCount() - 2);*/
+                mAdapter.notifyDataSetChanged();
                 mRecyclerView.postOnAnimation(new Runnable() {
                     @Override
                     public void run() {
@@ -106,7 +118,7 @@ public class ItemAnimatorActivity extends BaseActivity implements View.OnClickLi
                 break;
             case R.id.remove_bt:
                 mData.remove(mData.size() - 1);
-                mAdapter.notifyItemRemoved(mAdapter.getItemCount());
+                mAdapter.notifyItemRemoved(mData.size());
                 break;
             default:
         }
