@@ -8,6 +8,9 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
+        ndk {
+            abiFilters "armeabi-v8a", "armeabi", "armeabi-v7a", "x86", "x86_64", "mips", "mips64"
+        }
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -31,6 +34,16 @@ dependencies {
     implementation 'com.github.yyued:SVGAPlayer-Android:2.1.10'
     implementation 'com.zhy:base-rvadapter:3.0.3'
     implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'com.tencent.tbs.tbssdk:sdk:43903'
     implementation project(path: ':layoutmanagerlib')
+    implementation 'com.just.agentweb:agentweb:4.1.3' // (必选)
+    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'com.zwc:viewdialog:1.0.0'
+    implementation "com.idonans.lang:lang:0.1.7"
+    implementation 'com.shuyu:GSYVideoPlayer:7.1.4'
 
+    //glide
+    def GLIDE_VERSION = "4.11.0"
+    implementation "com.github.bumptech.glide:glide:${GLIDE_VERSION}"
+    annotationProcessor "com.github.bumptech.glide:compiler:${GLIDE_VERSION}"
 }

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".moudle.AgentWebActivity">
+
+    <FrameLayout
+        android:id="@+id/web_layout_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <RelativeLayout
+        android:id="@+id/x5_edu_view"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:layout_below="@+id/app_webview_titleview_layout"
+        android:visibility="invisible">
+
+        <LinearLayout
+            android:id="@+id/x5_edu_back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:scaleX="0.8"
+                android:scaleY="0.8"
+                android:src="@mipmap/previous_blue_stroke" />
+        </LinearLayout>
+
+    </RelativeLayout>
+</FrameLayout>
