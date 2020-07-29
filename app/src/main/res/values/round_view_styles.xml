@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="rv_backgroundColor" format="color" />
+    <attr name="rv_backgroundPressColor" format="color" />
+    <attr name="rv_cornerRadius" format="dimension" />
+    <attr name="rv_cornerRadius_BL" format="dimension" />
+    <attr name="rv_cornerRadius_BR" format="dimension" />
+    <attr name="rv_cornerRadius_TL" format="dimension" />
+    <attr name="rv_cornerRadius_TR" format="dimension" />
+    <attr name="rv_isRadiusHalfHeight" format="boolean" />
+    <attr name="rv_isRippleEnable" format="boolean" />
+    <attr name="rv_isWidthHeightEqual" format="boolean" />
+    <attr name="rv_strokeColor" format="color" />
+    <attr name="rv_strokePressColor" format="color" />
+    <attr name="rv_strokeWidth" format="dimension" />
+    <attr name="rv_textPressColor" format="color" />
+    <attr name="rv_gradientStartColor" format="color" />
+    <attr name="rv_gradientEndColor" format="color" />
+    <attr name="rv_gradientCenterColor" format="color" />
+    <attr name="rv_gradientOrientation">
+        <enum name="BL_TR" value="0" />
+        <enum name="BOTTOM_TOP" value="1" />
+        <enum name="BR_TL" value="2" />
+        <enum name="LEFT_RIGHT" value="3" />
+        <enum name="RIGHT_LEFT" value="4" />
+        <enum name="TL_BR" value="5" />
+        <enum name="TOP_BOTTOM" value="6" />
+        <enum name="TR_BL" value="7" />
+    </attr>
+    <attr name="rv_gradientType">
+        <enum name="linear" value="0" />
+        <enum name="radial" value="1" />
+        <enum name="sweep" value="2" />
+    </attr>
+    <declare-styleable name="RoundFrameLayout">
+        <attr name="rv_backgroundColor" />
+        <attr name="rv_backgroundPressColor" />
+        <attr name="rv_cornerRadius" />
+        <attr name="rv_strokeWidth" />
+        <attr name="rv_strokeColor" />
+        <attr name="rv_strokePressColor" />
+        <attr name="rv_isRadiusHalfHeight" />
+        <attr name="rv_isWidthHeightEqual" />
+        <attr name="rv_cornerRadius_TL" />
+        <attr name="rv_cornerRadius_TR" />
+        <attr name="rv_cornerRadius_BL" />
+        <attr name="rv_cornerRadius_BR" />
+        <attr name="rv_isRippleEnable" />
+        <attr name="rv_gradientStartColor" />
+        <attr name="rv_gradientEndColor" />
+        <attr name="rv_gradientCenterColor" />
+        <attr name="rv_gradientOrientation" />
+        <attr name="rv_gradientType" />
+    </declare-styleable>
+    <declare-styleable name="RoundLinearLayout">
+        <attr name="rv_backgroundColor" />
+        <attr name="rv_backgroundPressColor" />
+        <attr name="rv_cornerRadius" />
+        <attr name="rv_strokeWidth" />
+        <attr name="rv_strokeColor" />
+        <attr name="rv_strokePressColor" />
+        <attr name="rv_isRadiusHalfHeight" />
+        <attr name="rv_isWidthHeightEqual" />
+        <attr name="rv_cornerRadius_TL" />
+        <attr name="rv_cornerRadius_TR" />
+        <attr name="rv_cornerRadius_BL" />
+        <attr name="rv_cornerRadius_BR" />
+        <attr name="rv_isRippleEnable" />
+        <attr name="rv_gradientStartColor" />
+        <attr name="rv_gradientEndColor" />
+        <attr name="rv_gradientCenterColor" />
+        <attr name="rv_gradientOrientation" />
+        <attr name="rv_gradientType" />
+    </declare-styleable>
+    <declare-styleable name="RoundRelativeLayout">
+        <attr name="rv_backgroundColor" />
+        <attr name="rv_backgroundPressColor" />
+        <attr name="rv_cornerRadius" />
+        <attr name="rv_strokeWidth" />
+        <attr name="rv_strokeColor" />
+        <attr name="rv_strokePressColor" />
+        <attr name="rv_isRadiusHalfHeight" />
+        <attr name="rv_isWidthHeightEqual" />
+        <attr name="rv_cornerRadius_TL" />
+        <attr name="rv_cornerRadius_TR" />
+        <attr name="rv_cornerRadius_BL" />
+        <attr name="rv_cornerRadius_BR" />
+        <attr name="rv_isRippleEnable" />
+        <attr name="rv_gradientStartColor" />
+        <attr name="rv_gradientEndColor" />
+        <attr name="rv_gradientCenterColor" />
+        <attr name="rv_gradientOrientation" />
+        <attr name="rv_gradientType" />
+    </declare-styleable>
+    <declare-styleable name="RoundTextView">
+        <attr name="rv_backgroundColor" />
+        <attr name="rv_backgroundPressColor" />
+        <attr name="rv_cornerRadius" />
+        <attr name="rv_strokeWidth" />
+        <attr name="rv_strokeColor" />
+        <attr name="rv_strokePressColor" />
+        <attr name="rv_textPressColor" />
+        <attr name="rv_isRadiusHalfHeight" />
+        <attr name="rv_isWidthHeightEqual" />
+        <attr name="rv_cornerRadius_TL" />
+        <attr name="rv_cornerRadius_TR" />
+        <attr name="rv_cornerRadius_BL" />
+        <attr name="rv_cornerRadius_BR" />
+        <attr name="rv_isRippleEnable" />
+        <attr name="rv_gradientStartColor" />
+        <attr name="rv_gradientEndColor" />
+        <attr name="rv_gradientCenterColor" />
+        <attr name="rv_gradientOrientation" />
+        <attr name="rv_gradientType" />
+    </declare-styleable>
+</resources>

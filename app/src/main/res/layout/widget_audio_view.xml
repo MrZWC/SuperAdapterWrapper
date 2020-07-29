@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.example.superadapterwrapper.widget.roundview.RoundLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingEnd="10dp"
+        app:rv_backgroundColor="@color/white"
+        app:rv_cornerRadius="6dp">
+
+        <ImageView
+            android:id="@+id/start_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingStart="10dp"
+            android:src="@mipmap/ic_audio_start" />
+
+        <SeekBar
+            android:id="@+id/progress"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1.0"
+            android:background="@null"
+            android:max="100"
+            android:maxHeight="4dp"
+            android:minHeight="4dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:progressDrawable="@drawable/my_video_seek_progress"
+            android:thumb="@drawable/video_seek_thumb" />
+
+        <TextView
+            android:id="@+id/total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00:00"
+            android:textColor="#313131"
+            android:textSize="12sp" />
+    </com.example.superadapterwrapper.widget.roundview.RoundLinearLayout>
+</FrameLayout>

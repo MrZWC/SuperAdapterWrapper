@@ -16,7 +16,21 @@ android {
     buildTypes {
         release {
             minifyEnabled false
+            debuggable false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            debuggable true
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
         }
     }
 }
@@ -40,10 +54,19 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'com.zwc:viewdialog:1.0.0'
     implementation "com.idonans.lang:lang:0.1.7"
-    implementation 'com.shuyu:GSYVideoPlayer:7.1.4'
+    implementation 'com.shuyu:gsyVideoPlayer-java:7.1.4'
+//更多ijk的编码支持
+    implementation 'com.shuyu:gsyVideoPlayer-ex_so:7.1.4'
+
 
     //glide
     def GLIDE_VERSION = "4.11.0"
     implementation "com.github.bumptech.glide:glide:${GLIDE_VERSION}"
     annotationProcessor "com.github.bumptech.glide:compiler:${GLIDE_VERSION}"
+
+    implementation 'io.reactivex.rxjava3:rxjava:3.0.4'
+    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
+    implementation 'com.github.zhaokaiqiang.klog:library:1.6.0'
+    implementation group: 'org.apache.cordova', name: 'framework', version: '8.1.0'
+    implementation 'com.github.tbruyelle:rxpermissions:0.10.2'
 }

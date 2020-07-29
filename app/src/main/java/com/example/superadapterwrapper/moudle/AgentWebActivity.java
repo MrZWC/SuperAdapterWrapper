@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.JavascriptInterface;
 import android.webkit.SslErrorHandler;
+import android.webkit.ValueCallback;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebResourceResponse;
@@ -29,12 +30,15 @@ import com.example.superadapterwrapper.common.UIController;
 import com.idonans.lang.thread.Threads;
 import com.just.agentweb.AbsAgentWebSettings;
 import com.just.agentweb.AgentWeb;
+import com.just.agentweb.AgentWebView;
 import com.just.agentweb.DefaultWebClient;
 import com.just.agentweb.IAgentWebSettings;
 import com.just.agentweb.MiddlewareWebChromeBase;
 import com.just.agentweb.MiddlewareWebClientBase;
 import com.just.agentweb.PermissionInterceptor;
+import com.socks.library.KLog;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 public class AgentWebActivity extends BaseActivity {
@@ -69,6 +73,7 @@ public class AgentWebActivity extends BaseActivity {
         String url1 = "https://zhidao.baidu.com/question/95254875.html";
         String url2 = "http://124.161.87.43:8081/fs/resource/792445dd-1fa4-436e-836d-60a67a1d5dde/index.html";
         String url3 = "http://10.6.30.117:8099/c/index.html";
+        String url4 = "file:///android_asset/www/indexlocalhtml.html";
         mAgentWeb = AgentWeb.with(this)//
                 .setAgentWebParent((FrameLayout) mWebLayoutView, -1, new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT))//传入AgentWeb的父控件。
                 .useDefaultIndicator(-1, 3)//设置进度条颜色与高度，-1为默认值，高度为2，单位为dp。
@@ -86,10 +91,22 @@ public class AgentWebActivity extends BaseActivity {
                 .interceptUnkownUrl() //拦截找不到相关页面的Url AgentWeb 3.0.0 加入。
                 .createAgentWeb()//创建AgentWeb。
                 .ready()//设置 WebSettings。
-                .go(url3); //WebView载入该url地址的页面并显示。
+                .go(url4); //WebView载入该url地址的页面并显示。
+        mAgentWeb.getWebCreator().getWebView().getSettings().setJavaScriptEnabled(true);
         mAgentWeb.getWebCreator().getWebView().setOverScrollMode(WebView.OVER_SCROLL_NEVER);
         mAgentWeb.getJsInterfaceHolder().addJavaObject("native", new JsCallBackClass());
 
+    }
+
+    String javascriptq = "var ynPlugins = new Object();\n" +
+            "        ynPlugins.playVideo = function(a){\n" +
+            "            alert('ssss')\n" +
+            "            window.native.playVideo('{\"url\":\"sss阿斯打死多 ssssssssssss\",\"title\":\"音乐声音\"}')\n" +
+            "        }";
+
+    private void addPluginJs(WebView webView) {
+
+        webView.loadUrl("javascript:" + javascriptq);
     }
 
     public class JsCallBackClass {
@@ -103,6 +120,11 @@ public class AgentWebActivity extends BaseActivity {
         @JavascriptInterface
         public void closeWindow() {
             finish();
+        }
+
+        @JavascriptInterface
+        public void playVideo(String json) {
+            KLog.i("playVideo", json);
         }
 
         /**
@@ -165,10 +187,38 @@ public class AgentWebActivity extends BaseActivity {
             return super.shouldOverrideUrlLoading(view, request);
         }
 
+        @Override
+        public WebResourceResponse shouldInterceptRequest(WebView view, String url) {
+            if (url.contains("main.js")) {//加载指定.js时 引导服务端加载本地Assets/www文件夹下的cordova.js
+                try {
+                    return new WebResourceResponse("application/x-javascript", "utf-8", getBaseContext().getAssets().open("www/main2.js"));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return super.shouldInterceptRequest(view, url);
+        }
+
         @Nullable
         @Override
         public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {
+            addPluginJs(view);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                if (request.getUrl().toString().contains("main.js")) {//加载指定.js时 引导服务端加载本地Assets/www文件夹下的cordova.js
+                    try {
+                        return new WebResourceResponse("application/x-javascript", "utf-8", getBaseContext().getAssets().open("www/main2.js"));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
             return super.shouldInterceptRequest(view, request);
+        }
+
+        @Override
+        public void onLoadResource(WebView view, String url) {
+            addPluginJs(view);
+            super.onLoadResource(view, url);
         }
 
         @Override
@@ -176,6 +226,12 @@ public class AgentWebActivity extends BaseActivity {
             super.onPageStarted(view, url, favicon);
             //Log.i(TAG, "mUrl:" + url + " onPageStarted  target:" + getUrl());
             timer.put(url, System.currentTimeMillis());
+            view.evaluateJavascript(javascriptq, new ValueCallback<String>() {
+                @Override
+                public void onReceiveValue(String value) {
+
+                }
+            });
            /* if (url.equals(getUrl())) {
                 pageNavigator(View.GONE);
             } else {
@@ -186,7 +242,7 @@ public class AgentWebActivity extends BaseActivity {
         @Override
         public void onPageFinished(WebView view, String url) {
             super.onPageFinished(view, url);
-
+            addPluginJs(view);
             if (timer.get(url) != null) {
                 long overTime = System.currentTimeMillis();
                 Long startTime = timer.get(url);

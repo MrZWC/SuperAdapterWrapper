@@ -11,6 +11,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.superadapterwrapper.adapter.MainAdapter;
 import com.example.superadapterwrapper.base.BaseActivity;
 import com.example.superadapterwrapper.moudle.AgentWebActivity;
+import com.example.superadapterwrapper.moudle.Camera2VideoActivity;
+import com.example.superadapterwrapper.moudle.Camera2VideoNewActivity;
+import com.example.superadapterwrapper.moudle.MediaRecorderActivity;
+import com.example.superadapterwrapper.moudle.WifiActivity;
+import com.example.superadapterwrapper.moudle.audio.AudioActivity;
 import com.example.superadapterwrapper.moudle.BrowserActivity;
 import com.example.superadapterwrapper.moudle.FilechooserActivity;
 import com.example.superadapterwrapper.moudle.FullScreenActivity;
@@ -59,7 +64,11 @@ public class MainActivity extends BaseActivity {
         strings.add("用于展示在web端<input type=text>的标签被选择之后，文件选择器的制作和生成");
         strings.add("用于演示X5webview实现视频的全屏播放功能 其中注意 X5的默认全屏方式 与 android 系统的全屏方式");
         strings.add("agentweb");
-        strings.add("video");
+        strings.add("video播放");
+        strings.add("audio播放");
+        strings.add("Camera2Video");
+        strings.add("MediaRecorder视频录制");
+        strings.add("wifi扫描");
         ShowDataView();
     }
 
@@ -120,6 +129,18 @@ public class MainActivity extends BaseActivity {
                         break;
                     case 13:
                         VideoActivity.start(getContext());
+                        break;
+                    case 14:
+                        AudioActivity.start(getContext());
+                        break;
+                    case 15:
+                        Camera2VideoNewActivity.start(getContext());
+                        break;
+                    case 16:
+                        MediaRecorderActivity.start(getContext());
+                        break;
+                    case 17:
+                        WifiActivity.start(getContext());
                         break;
                     default:
                 }

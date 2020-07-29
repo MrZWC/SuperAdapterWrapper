@@ -1,12 +1,18 @@
 package com.example.superadapterwrapper.widget.video;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.TextView;
 
 import com.example.superadapterwrapper.R;
+import com.example.superadapterwrapper.widget.dialog.CommonDialog;
+import com.shuyu.gsyvideoplayer.utils.CommonUtil;
+import com.shuyu.gsyvideoplayer.utils.NetworkUtils;
 import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer;
+
+import java.text.DecimalFormat;
 
 /**
  * Created by Android Studio.
@@ -19,6 +25,11 @@ import com.shuyu.gsyvideoplayer.video.StandardGSYVideoPlayer;
 public class MyVideoView extends StandardGSYVideoPlayer {
     private View mErrorView;
     private TextView mRePlay;
+    private long mVideoSize;//单位b
+    public static final long B = 1L;
+    public static final long KB = 1024 * B;
+    public static final long MB = 1024 * KB;
+    public static final long GB = 1024 * MB;
 
     public MyVideoView(Context context, Boolean fullFlag) {
         super(context, fullFlag);
@@ -34,6 +45,7 @@ public class MyVideoView extends StandardGSYVideoPlayer {
 
     /**
      * layout的xml文件的view  id 不能轻易改动关系到gsyplayer的逻辑实现 请阅读源码逻辑后在改动
+     *
      * @return
      */
     @Override
@@ -43,6 +55,7 @@ public class MyVideoView extends StandardGSYVideoPlayer {
 
     /**
      * 初始化view
+     *
      * @param context
      */
     @Override
@@ -72,6 +85,9 @@ public class MyVideoView extends StandardGSYVideoPlayer {
         super.changeUiToError();
         setViewShowState(mTopContainer, View.VISIBLE);
         setViewShowState(mErrorView, View.VISIBLE);
+        mErrorView.setOnClickListener(v -> {
+
+        });
         mRePlay.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,5 +95,66 @@ public class MyVideoView extends StandardGSYVideoPlayer {
                 setViewShowState(mErrorView, View.INVISIBLE);
             }
         });
+    }
+
+    @Override
+    protected void showWifiDialog() {
+        if (!NetworkUtils.isAvailable(mContext)) {
+            //Toast.makeText(mContext, getResources().getString(R.string.no_net), Toast.LENGTH_LONG).show();
+            startPlayLogic();
+            return;
+        }
+        String dataSizeString = getDataSizeString(mVideoSize);
+        String contentString = TextUtils.isEmpty(dataSizeString) ? "" : "您正在使用手机网络，继续播放将消耗流量，当前需要" + dataSizeString;
+        CommonDialog.builder(CommonUtil.getActivityContext(getContext()))
+                .setLeftString("停止播放")
+                .setRightString("继续播放")
+                .setContentString(contentString)
+                .setRightlListener(dialog -> {
+                    startPlayLogic();
+                    dialog.hide();
+                })
+                .build().show();
+    }
+
+    public long getVideoSize() {
+        return mVideoSize;
+    }
+
+    public void setVideoSize(long videoSize) {
+        mVideoSize = videoSize;
+    }
+
+    private String getDataSizeString(long size) {
+        DecimalFormat decimalFormat = new DecimalFormat(".0");//构造方法的字符格式这里如果小数不足2位,会以0补足.
+        if (size < MB) {
+            return "0M";
+        }
+        if (size < GB) {
+            float l = 1f * size / MB;
+            return decimalFormat.format(l) + "M";
+        } else if (size >= GB) {
+            float l = 1f * size / GB;
+            return decimalFormat.format(l) + "G";
+        }
+
+        return "";
+    }
+/*
+
+    @Override
+    protected boolean setUp(String url, boolean cacheWithPlay, File cachePath, String title, boolean changeState) {
+        boolean b = super.setUp(url, cacheWithPlay, cachePath, title, changeState);
+        if (isShowNetConfirm()) {
+            showWifiDialog();
+            return false;
+        }
+        return b;
+    }
+*/
+
+    @Override
+    public void clickStartIcon() {
+        super.clickStartIcon();
     }
 }

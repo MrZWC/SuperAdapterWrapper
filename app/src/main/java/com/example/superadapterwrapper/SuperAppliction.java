@@ -1,6 +1,7 @@
 package com.example.superadapterwrapper;
 
 import android.app.Application;
+import android.content.Context;
 import android.util.Log;
 
 import com.tencent.smtt.sdk.QbSdk;
@@ -38,5 +39,10 @@ public class SuperAppliction extends Application {
 
     public static SuperAppliction getApp() {
         return appliction;
+    }
+
+    @Override
+    public Context getApplicationContext() {
+        return super.getApplicationContext();
     }
 }

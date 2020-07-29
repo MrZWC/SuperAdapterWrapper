@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.example.superadapterwrapper.widget.roundview.RoundLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginStart="40dp"
+    android:layout_marginEnd="40dp"
+    android:orientation="vertical"
+    android:padding="20dp"
+    app:rv_backgroundColor="@color/white"
+    app:rv_cornerRadius="4dp">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="提示"
+        android:textColor="@color/black"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:text=""
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <com.example.superadapterwrapper.widget.roundview.RoundTextView
+            android:id="@+id/left_btn"
+            android:layout_width="133dp"
+            android:layout_height="42dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="取消"
+            android:textColor="@color/C12B5B0"
+            android:textSize="16sp"
+            app:rv_cornerRadius="8dp"
+            app:rv_strokeColor="@color/C12B5B0"
+            app:rv_strokeWidth="1dp" />
+
+        <Space
+            android:id="@+id/line_view"
+            android:layout_width="15dp"
+            android:layout_height="wrap_content" />
+
+        <com.example.superadapterwrapper.widget.roundview.RoundTextView
+            android:id="@+id/right_btn"
+            android:layout_width="133dp"
+            android:layout_height="42dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="确认"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:rv_backgroundColor="@color/C12B5B0"
+            app:rv_cornerRadius="8dp"
+            app:rv_strokeColor="@color/C12B5B0"
+            app:rv_strokeWidth="1dp" />
+    </LinearLayout>
+
+</com.example.superadapterwrapper.widget.roundview.RoundLinearLayout>

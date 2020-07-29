@@ -1,21 +1,32 @@
 package com.example.superadapterwrapper.moudle;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.webkit.JavascriptInterface;
 import android.webkit.WebChromeClient;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
 
+import androidx.annotation.Nullable;
+
 import com.example.superadapterwrapper.R;
 import com.example.superadapterwrapper.base.BaseActivity;
+import com.socks.library.KLog;
+
+import java.io.IOException;
 
 /**
  * Created by Android Studio.
@@ -26,11 +37,14 @@ import com.example.superadapterwrapper.base.BaseActivity;
 public class WebViewActivity extends BaseActivity {
     private WebView mMyWebView;
 
-    /** 视频全屏参数 */
+    /**
+     * 视频全屏参数
+     */
     protected static final FrameLayout.LayoutParams COVER_SCREEN_PARAMS = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
     private View customView;
     private FrameLayout fullscreenContainer;
     private WebChromeClient.CustomViewCallback customViewCallback;
+
     public static void start(Context context) {
         Intent intent = new Intent(context, WebViewActivity.class);
         context.startActivity(intent);
@@ -46,37 +60,9 @@ public class WebViewActivity extends BaseActivity {
         mMyWebView = getView(R.id.my_web_view);
     }
 
+    @SuppressLint("JavascriptInterface")
     @Override
     protected void initData(Bundle savedInstanceState) {
-
-        mMyWebView.setWebChromeClient(new WebChromeClient(){
-
-          /*  *//*** 视频播放相关的方法 **//*
-
-            @Override
-            public View getVideoLoadingProgressView() {
-                FrameLayout frameLayout = new FrameLayout(WebViewActivity.this);
-                frameLayout.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT));
-                return frameLayout;
-            }
-
-            @Override
-            public void onShowCustomView(View view, CustomViewCallback callback) {
-                showCustomView(view, callback);
-            }
-
-            @Override
-            public void onHideCustomView() {
-                hideCustomView();
-            }*/
-        });
-        mMyWebView.setWebViewClient(new WebViewClient(){
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                mMyWebView.loadUrl(url);
-                return true;
-            }
-        });
         WebSettings webSettings = mMyWebView.getSettings();
         webSettings.setPluginState(WebSettings.PluginState.ON);
         // 让WebView能够执行javaScript
@@ -101,91 +87,54 @@ public class WebViewActivity extends BaseActivity {
         // 设置默认字体大小
         webSettings.setDefaultFontSize(12);
         webSettings.setJavaScriptEnabled(true);
-        String url="http://124.161.87.43:8081/ynedut/third/auth/forwardPage.htm?version=V1.0&mobile=1&access_token=eyJqdGkiOiJ5bi1tZXNzYWdlIiwiaXNzIjoiMSIsImF1ZCI6IjEiLCJleHAiOjE1OTIzMDU5MTR9.xTtLaqth8DO729tXqwMRQvqzAHH7Uu0_VKDxzFKlwsNAtWKmdYGzFnX0DaV0N0P4zToiEytjxMYUWib90Ims9g&openId=3b25b415-4aef-4973-8d20-2d37f1cbd79c&urlStr=/handheldlearn/index.html";
-        String url1="https://zhidao.baidu.com/question/95254875.html";
-        String url2="http://124.161.87.43:8081/ynedut/handheldlearn/index.html";
-        String url3="http://10.6.30.117:8099/d/index.html";
-        mMyWebView.loadUrl(url);
+        mMyWebView.addJavascriptInterface(new InJavaScriptLocalObj(), "local_obj");
+        mMyWebView.setWebViewClient(new MyWebChromeClient());
+        mMyWebView.setWebChromeClient(new WebChromeClient());
+        String url = "http://124.161.87.43:8081/ynedut/third/auth/forwardPage.htm?version=V1.0&mobile=1&access_token=eyJqdGkiOiJ5bi1tZXNzYWdlIiwiaXNzIjoiMSIsImF1ZCI6IjEiLCJleHAiOjE1OTIzMDU5MTR9.xTtLaqth8DO729tXqwMRQvqzAHH7Uu0_VKDxzFKlwsNAtWKmdYGzFnX0DaV0N0P4zToiEytjxMYUWib90Ims9g&openId=3b25b415-4aef-4973-8d20-2d37f1cbd79c&urlStr=/handheldlearn/index.html";
+        String url1 = "https://zhidao.baidu.com/question/95254875.html";
+        String url2 = "http://124.161.87.43:8081/ynedut/handheldlearn/index.html";
+        String url3 = "http://10.6.30.117:8099/d/index.html";
+        String url4 = "file:///android_asset/www/indexlocalhtml.html";
+        String url5 = "http://10.6.30.62:63341/untitled/index.html";
+        mMyWebView.loadUrl(url4);
     }
+
     public class MyWebChromeClient extends WebViewClient {
+        @Nullable
         @Override
-        public void onScaleChanged(WebView view, float oldScale, float newScale) {
-            if(newScale - oldScale > 7) {
-                view.setInitialScale((int)(oldScale / newScale * 100)); //异常放大，缩回去。
-            }
-        }
-    }
-
-
-    /** 视频播放全屏 **/
-    private void showCustomView(View view, WebChromeClient.CustomViewCallback callback) {
-        // if a view already exists then immediately terminate the new one
-        if (customView != null) {
-            callback.onCustomViewHidden();
-            return;
-        }
-
-        WebViewActivity.this.getWindow().getDecorView();
-
-        FrameLayout decor = (FrameLayout) getWindow().getDecorView();
-        fullscreenContainer = new FullscreenHolder(WebViewActivity.this);
-        fullscreenContainer.addView(view, COVER_SCREEN_PARAMS);
-        decor.addView(fullscreenContainer, COVER_SCREEN_PARAMS);
-        customView = view;
-        setStatusBarVisibility(false);
-        customViewCallback = callback;
-    }
-
-    /** 隐藏视频全屏 */
-    private void hideCustomView() {
-        if (customView == null) {
-            return;
-        }
-
-        setStatusBarVisibility(true);
-        FrameLayout decor = (FrameLayout) getWindow().getDecorView();
-        decor.removeView(fullscreenContainer);
-        fullscreenContainer = null;
-        customView = null;
-        customViewCallback.onCustomViewHidden();
-        mMyWebView.setVisibility(View.VISIBLE);
-    }
-
-    /** 全屏容器界面 */
-    static class FullscreenHolder extends FrameLayout {
-
-        public FullscreenHolder(Context ctx) {
-            super(ctx);
-            setBackgroundColor(ctx.getResources().getColor(android.R.color.black));
-        }
-
-        @Override
-        public boolean onTouchEvent(MotionEvent evt) {
-            return true;
-        }
-    }
-
-    private void setStatusBarVisibility(boolean visible) {
-        int flag = visible ? 0 : WindowManager.LayoutParams.FLAG_FULLSCREEN;
-        getWindow().setFlags(flag, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-    }
-
-   /* @Override
-    public boolean onKeyUp(int keyCode, KeyEvent event) {
-        switch (keyCode) {
-            case KeyEvent.KEYCODE_BACK:
-                *//** 回退键 事件处理 优先级:视频播放全屏-网页回退-关闭页面 *//*
-                if (customView != null) {
-                    hideCustomView();
-                } else if (mMyWebView.canGoBack()) {
-                    mMyWebView.goBack();
-                } else {
-                    finish();
+        public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                if (request.getUrl().toString().contains("main.js")) {//加载指定.js时 引导服务端加载本地Assets/www文件夹下的cordova.js
+                    try {
+                        return new WebResourceResponse("application/x-javascript", "utf-8", getBaseContext().getAssets().open("www/main2.js"));
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
-                return true;
-            default:
-                return super.onKeyUp(keyCode, event);
+            }
+            return super.shouldInterceptRequest(view, request);
         }
-    }*/
+
+        @Nullable
+        @Override
+        public WebResourceResponse shouldInterceptRequest(WebView view, String url) {
+            if (url.contains("main.js")) {//加载指定.js时 引导服务端加载本地Assets/www文件夹下的cordova.js
+                try {
+                    return new WebResourceResponse("application/x-javascript", "utf-8", getBaseContext().getAssets().open("www/main2.js"));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            return super.shouldInterceptRequest(view, url);
+        }
+    }
+
+    final class InJavaScriptLocalObj {
+
+        @JavascriptInterface
+        public void showSource(String html) {
+            KLog.d("HTMLsource", html);
+        }
+    }
 }
 
