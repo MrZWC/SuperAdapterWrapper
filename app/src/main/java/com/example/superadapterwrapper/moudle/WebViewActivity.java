@@ -87,7 +87,7 @@ public class WebViewActivity extends BaseActivity {
         // 设置默认字体大小
         webSettings.setDefaultFontSize(12);
         webSettings.setJavaScriptEnabled(true);
-        mMyWebView.addJavascriptInterface(new InJavaScriptLocalObj(), "local_obj");
+        //mMyWebView.addJavascriptInterface(new InJavaScriptLocalObj(), "local_obj");
         mMyWebView.setWebViewClient(new MyWebChromeClient());
         mMyWebView.setWebChromeClient(new WebChromeClient());
         String url = "http://124.161.87.43:8081/ynedut/third/auth/forwardPage.htm?version=V1.0&mobile=1&access_token=eyJqdGkiOiJ5bi1tZXNzYWdlIiwiaXNzIjoiMSIsImF1ZCI6IjEiLCJleHAiOjE1OTIzMDU5MTR9.xTtLaqth8DO729tXqwMRQvqzAHH7Uu0_VKDxzFKlwsNAtWKmdYGzFnX0DaV0N0P4zToiEytjxMYUWib90Ims9g&openId=3b25b415-4aef-4973-8d20-2d37f1cbd79c&urlStr=/handheldlearn/index.html";
@@ -96,35 +96,22 @@ public class WebViewActivity extends BaseActivity {
         String url3 = "http://10.6.30.117:8099/d/index.html";
         String url4 = "file:///android_asset/www/indexlocalhtml.html";
         String url5 = "http://10.6.30.62:63341/untitled/index.html";
-        mMyWebView.loadUrl(url4);
+        String url6 = "https://h5.weijiangshi.cn/logintest/#/home?key=9b21ada0-efcf-4795-9ff0-57cc488af285-112";
+        String url7 = "https://liulanmi.com/labs/core.html";
+        String url8 = "https://yineng.s2.udesk.cn/im_client/?web_plugin_id=25969&agent_id=34269&group_id=28709";
+        mMyWebView.loadUrl(url8);
     }
 
     public class MyWebChromeClient extends WebViewClient {
         @Nullable
         @Override
         public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                if (request.getUrl().toString().contains("main.js")) {//加载指定.js时 引导服务端加载本地Assets/www文件夹下的cordova.js
-                    try {
-                        return new WebResourceResponse("application/x-javascript", "utf-8", getBaseContext().getAssets().open("www/main2.js"));
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
             return super.shouldInterceptRequest(view, request);
         }
 
         @Nullable
         @Override
         public WebResourceResponse shouldInterceptRequest(WebView view, String url) {
-            if (url.contains("main.js")) {//加载指定.js时 引导服务端加载本地Assets/www文件夹下的cordova.js
-                try {
-                    return new WebResourceResponse("application/x-javascript", "utf-8", getBaseContext().getAssets().open("www/main2.js"));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
             return super.shouldInterceptRequest(view, url);
         }
     }

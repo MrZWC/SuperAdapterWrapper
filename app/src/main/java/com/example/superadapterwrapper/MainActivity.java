@@ -11,25 +11,30 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.superadapterwrapper.adapter.MainAdapter;
 import com.example.superadapterwrapper.base.BaseActivity;
 import com.example.superadapterwrapper.moudle.AgentWebActivity;
-import com.example.superadapterwrapper.moudle.Camera2VideoActivity;
-import com.example.superadapterwrapper.moudle.Camera2VideoNewActivity;
-import com.example.superadapterwrapper.moudle.MediaRecorderActivity;
-import com.example.superadapterwrapper.moudle.WifiActivity;
-import com.example.superadapterwrapper.moudle.audio.AudioActivity;
 import com.example.superadapterwrapper.moudle.BrowserActivity;
+import com.example.superadapterwrapper.moudle.Camera2VideoNewActivity;
+import com.example.superadapterwrapper.moudle.CordovaTestActivity;
 import com.example.superadapterwrapper.moudle.FilechooserActivity;
 import com.example.superadapterwrapper.moudle.FullScreenActivity;
 import com.example.superadapterwrapper.moudle.ItemAnimatorActivity;
 import com.example.superadapterwrapper.moudle.LikeAnimationActivity;
+import com.example.superadapterwrapper.moudle.MediaRecorderActivity;
 import com.example.superadapterwrapper.moudle.RecyclerBannerActivity;
 import com.example.superadapterwrapper.moudle.ShadowActivity;
+import com.example.superadapterwrapper.moudle.SmallFileActivity;
 import com.example.superadapterwrapper.moudle.SvgaActivity;
 import com.example.superadapterwrapper.moudle.TanActivity;
 import com.example.superadapterwrapper.moudle.VideoActivity;
 import com.example.superadapterwrapper.moudle.WebViewActivity;
+import com.example.superadapterwrapper.moudle.WifiActivity;
 import com.example.superadapterwrapper.moudle.X5TencentWebViewActivity;
 import com.example.superadapterwrapper.moudle.XfermodeActivity;
+import com.example.superadapterwrapper.moudle.audio.AudioActivity;
+import com.example.superadapterwrapper.net.download.DownloadProgressListener;
 import com.example.superadapterwrapper.util.DensityUtils;
+import com.example.superadapterwrapper.util.FileDirManager;
+import com.example.superadapterwrapper.util.UpdateH5Util;
+import com.example.superadapterwrapper.util.ZipUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,7 +74,26 @@ public class MainActivity extends BaseActivity {
         strings.add("Camera2Video");
         strings.add("MediaRecorder视频录制");
         strings.add("wifi扫描");
+        strings.add(" ");
+        strings.add("cordovaTest");
+        strings.add("h5下载更新");
+        strings.add("h5解压更新");
         ShowDataView();
+        test();
+
+
+    }
+
+    private void test() {
+        /*String oldstring = "C8DF1716A89407F4BDE98D9A3EC5FC4F50461E554C729887C1186D31F4D6B80F6C36ADB138670EE867F7DB2E7882C15AB26B9885F5D833B1B515AD697ECD513F868AAD1A16B9CB739C9EABC5086E6093030AD92DD50C33B826A39F88B4ECE3FC09D32D79B9F5C886BE62A55DDEC8D38FC68D27129D7FDA6E9DAC00BE824FB4F89B7AF38CDD3AFBE17FB81AADC9EBC0324C1F64822147A16FAD3BFD5CB6F9ABD2";
+        KLog.d("CompressEncodeing", oldstring.length());
+        String compress = DeflaterUtils.zipString(oldstring);
+        KLog.d("CompressEncodeing", compress.length());
+        KLog.d("CompressEncodeing", compress);
+        String uncompress = DeflaterUtils.unzipString(compress);
+        KLog.d("CompressEncodeing", uncompress.length());
+        KLog.d("CompressEncodeing", uncompress);*/
+        String old = "asdasdasdas/dasdasdasdas";
     }
 
     private void ShowDataView() {
@@ -141,6 +165,25 @@ public class MainActivity extends BaseActivity {
                         break;
                     case 17:
                         WifiActivity.start(getContext());
+                        break;
+                    case 18:
+                        SmallFileActivity.start(getContext());
+                        break;
+                    case 19:
+                        CordovaTestActivity.start(getContext());
+                        break;
+                    case 20:
+                        UpdateH5Util updateH5Util = new UpdateH5Util();
+                        updateH5Util.update("http://10.6.30.117:8099/zuo/www.zip", new DownloadProgressListener() {
+                            @Override
+                            public void update(long bytesRead, long contentLength, boolean done) {
+
+                            }
+                        });
+                        break;
+                    case 21:
+                        String h5CacheDir = FileDirManager.getInstance().getH5CacheDir();
+                        ZipUtil.unZipFile(h5CacheDir,"/storage/emulated/0/Android/data/com.example.superadapterwrapper/files/h5/www.zip");
                         break;
                     default:
                 }

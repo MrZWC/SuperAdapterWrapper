@@ -2,9 +2,12 @@
 
 buildscript {
     repositories {
+        maven { url 'https://maven.aliyun.com/repository/public' } //central、jcenter
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://dl.bintray.com/umsdk/release' }
+        maven { url 'https://jitpack.io' }
         google()
         jcenter()
-        maven { url "https://jitpack.io" }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.5.0'
@@ -16,6 +19,10 @@ buildscript {
 
 allprojects {
     repositories {
+        maven { url 'https://maven.aliyun.com/repository/public' } //central、jcenter
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://dl.bintray.com/umsdk/release' }
+        maven { url 'https://jitpack.io' }
         google()
         jcenter()
         maven { url "https://jitpack.io" }

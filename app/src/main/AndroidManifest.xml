@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.superadapterwrapper">
 
+    <uses-sdk tools:overrideLibrary="org.apache.cordova" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -16,8 +18,7 @@
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <uses-feature
         android:name="android.hardware.camera"
@@ -35,7 +36,10 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="LockedOrientationActivity">
-        <activity android:name=".moudle.WifiActivity"></activity>
+        <activity android:name=".moudle.CordovaTestActivity"></activity>
+        <activity android:name=".moudle.HappyActivity" />
+        <activity android:name=".moudle.SmallFileActivity" />
+        <activity android:name=".moudle.WifiActivity" />
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait">

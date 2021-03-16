@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="x-rim-auto-match" content="none">
+    <title>掌上Ynedut</title>
+
+    <script src="cordova.js"></script>
+    <script>
+        function startPlayVideo(){
+            yn.plugin.videoplay.startPlayVideo(
+                                       {
+                                        "name":"视频播放威风威风",
+                                        "urlStr":"http://220.249.115.46:18080/wav/no.9.mp4",
+                                        "coverImage":""
+                                       },
+                                       function(){},
+                                       function(error){}
+                                       )
+        }
+        function startPlayAudio(){
+            yn.plugin.audioplay.startPlayAudio(
+                                       {
+                                        "audioUrl":"https://webfs.yun.kugou.com/202006231153/58cf4be8724c249900325361ad02a702/G215/M02/03/15/Fw4DAF7WRrCAQneCADOpeg3YN-g333.mp3",
+                                       },
+                                       function(){},
+                                       function(error){}
+                                       )
+        }
+
+
+    </script>
+</head>
+<body ng-app="starter">
+
+<div class="row">
+    <button type="button" onclick="startPlayVideo()">播放视频</button>
+    <button type="button" >这是旧的h5</button>
+    <input type="text" name="fname"/>
+</div>
+
+</body>
+</html>
