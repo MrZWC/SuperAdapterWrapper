@@ -3,6 +3,7 @@ package com.example.superadapterwrapper.moudle;
 import android.content.Context;
 import android.content.Intent;
 import android.net.wifi.ScanResult;
+import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +13,7 @@ import com.example.superadapterwrapper.R;
 import com.example.superadapterwrapper.base.BaseActivity;
 import com.example.superadapterwrapper.util.DisposableHolder;
 import com.example.superadapterwrapper.util.LogUtil;
+import com.example.superadapterwrapper.util.WifiAdmin;
 import com.socks.library.KLog;
 
 import java.util.List;
@@ -25,7 +27,10 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class WifiActivity extends BaseActivity {
     private TextView mTextView;
+    private TextView mOpenWifi;
+    private TextView mConnectWifi;
     String result = "数据源来自 = ";
+    private WifiAdmin mWifiAdmin;
 
     public static void start(Context context) {
         Intent intent = new Intent(context, WifiActivity.class);
@@ -43,6 +48,8 @@ public class WifiActivity extends BaseActivity {
     @Override
     protected void initView() {
         mTextView = getView(R.id.start_scan);
+        mOpenWifi = getView(R.id.open_wifi);
+        mConnectWifi = getView(R.id.connect_wifi);
     }
 
     @Override
@@ -54,64 +61,28 @@ public class WifiActivity extends BaseActivity {
                 startScan();
             }
         });
+        mOpenWifi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mWifiAdmin.openWifi(getContext());
+            }
+        });
+        mConnectWifi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String ssid = "YN-APP";
+                String password = "COursedev";
+                //String ssid = "Mr zuo";
+                //String password = "123456789";
+                WifiConfiguration wifiInfo = mWifiAdmin.createWifiInfo(ssid, password, 3);
+                mWifiAdmin.addNetwork(wifiInfo);
+            }
+        });
     }
 
     @Override
     protected void initData(Bundle savedInstanceState) {
-        /*
-         * 设置第1个Observable：通过网络获取数据
-         * 此处仅作网络请求的模拟
-         **/
-        Observable<String> network = Observable.just("网络").map(new Function<String, String>() {
-            @Override
-            public String apply(String s) throws Throwable {
-                if (true) {
-                    throw new Exception();
-                }
-                return "网络成功";
-            }
-        });
-
-        /*
-         * 设置第2个Observable：通过本地文件获取数据
-         * 此处仅作本地文件请求的模拟
-         **/
-        Observable<String> file = Observable.just("本地文件").map(new Function<String, String>() {
-            @Override
-            public String apply(String s) throws Throwable {
-                return "本地文件成功";
-            }
-        });
-
-
-        /*
-         * 通过merge（）合并事件 & 同时发送事件
-         **/
-        Observable.merge(network, file)
-                .subscribe(new Observer<String>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-
-                    }
-
-                    @Override
-                    public void onNext(String value) {
-                        LogUtil.d("数据源有： " + value);
-                        result = result + value + "+";
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        LogUtil.d("对Error事件作出响应");
-                    }
-
-                    // 接收合并事件后，统一展示
-                    @Override
-                    public void onComplete() {
-                        LogUtil.d("获取数据完成");
-                        LogUtil.d(result);
-                    }
-                });
+        mWifiAdmin = new WifiAdmin(this);
     }
 
     private void startScan() {
@@ -137,4 +108,5 @@ public class WifiActivity extends BaseActivity {
         super.onDestroy();
         mDisposableHolder.clear();
     }
+
 }
