@@ -1,2 +1,3 @@
 include ':app', ':layoutmanagerlib'
 rootProject.name='SuperAdapterWrapper'
+include ':smackLibrary'

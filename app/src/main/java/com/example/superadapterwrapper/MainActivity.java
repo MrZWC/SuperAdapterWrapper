@@ -15,15 +15,20 @@ import com.example.superadapterwrapper.moudle.BrowserActivity;
 import com.example.superadapterwrapper.moudle.Camera2VideoNewActivity;
 import com.example.superadapterwrapper.moudle.CordovaTestActivity;
 import com.example.superadapterwrapper.moudle.FilechooserActivity;
+import com.example.superadapterwrapper.moudle.BiometricActivity;
 import com.example.superadapterwrapper.moudle.FullScreenActivity;
 import com.example.superadapterwrapper.moudle.ItemAnimatorActivity;
 import com.example.superadapterwrapper.moudle.LikeAnimationActivity;
 import com.example.superadapterwrapper.moudle.MediaRecorderActivity;
 import com.example.superadapterwrapper.moudle.RecyclerBannerActivity;
+import com.example.superadapterwrapper.moudle.RsaActivity;
 import com.example.superadapterwrapper.moudle.ShadowActivity;
+import com.example.superadapterwrapper.moudle.SmackActivity;
 import com.example.superadapterwrapper.moudle.SmallFileActivity;
+import com.example.superadapterwrapper.moudle.StorageActivity;
 import com.example.superadapterwrapper.moudle.SvgaActivity;
 import com.example.superadapterwrapper.moudle.TanActivity;
+import com.example.superadapterwrapper.moudle.TextActivity;
 import com.example.superadapterwrapper.moudle.VideoActivity;
 import com.example.superadapterwrapper.moudle.WebViewActivity;
 import com.example.superadapterwrapper.moudle.WifiActivity;
@@ -78,6 +83,11 @@ public class MainActivity extends BaseActivity {
         strings.add("cordovaTest");
         strings.add("h5下载更新");
         strings.add("h5解压更新");
+        strings.add("生物识别");
+        strings.add("内存相关");
+        strings.add("RSA加解密");
+        strings.add("TextView换行测试");
+        strings.add("Smack测试");
         ShowDataView();
         test();
 
@@ -183,7 +193,22 @@ public class MainActivity extends BaseActivity {
                         break;
                     case 21:
                         String h5CacheDir = FileDirManager.getInstance().getH5CacheDir();
-                        ZipUtil.unZipFile(h5CacheDir,"/storage/emulated/0/Android/data/com.example.superadapterwrapper/files/h5/www.zip");
+                        ZipUtil.unZipFile(h5CacheDir, "/storage/emulated/0/Android/data/com.example.superadapterwrapper/files/h5/www.zip");
+                        break;
+                    case 22:
+                        BiometricActivity.start(getContext());
+                        break;
+                    case 23:
+                        StorageActivity.start(getContext());
+                        break;
+                    case 24:
+                        RsaActivity.start(getContext());
+                        break;
+                    case 25:
+                        TextActivity.start(getContext());
+                        break;
+                    case 26:
+                        SmackActivity.start(getContext());
                         break;
                     default:
                 }

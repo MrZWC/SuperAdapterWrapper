@@ -6,6 +6,9 @@ import android.util.Log;
 
 import com.tencent.smtt.sdk.QbSdk;
 
+import org.jivesoftware.smack.XMPPConnection;
+import org.jivesoftware.smack.android.AndroidSmackInitializer;
+
 /**
  * Created by Android Studio.
  * User: zuoweichen
@@ -19,6 +22,7 @@ public class SuperAppliction extends Application {
     public void onCreate() {
         super.onCreate();
         appliction = this;
+        AndroidSmackInitializer.initialize(this);
         //搜集本地tbs内核信息并上报服务器，服务器返回结果决定使用哪个内核。
 
         QbSdk.PreInitCallback cb = new QbSdk.PreInitCallback() {
@@ -34,7 +38,7 @@ public class SuperAppliction extends Application {
             }
         };
         //x5内核初始化接口
-        QbSdk.initX5Environment(getApplicationContext(),  cb);
+        QbSdk.initX5Environment(getApplicationContext(), cb);
     }
 
     public static SuperAppliction getApp() {
