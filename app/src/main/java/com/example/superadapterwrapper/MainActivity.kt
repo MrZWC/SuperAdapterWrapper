@@ -56,6 +56,7 @@ class MainActivity : BaseActivity() {
         strings.add("RSA加解密")
         strings.add("TextView换行测试")
         strings.add("Smack测试")
+        strings.add("大图查看")
         ShowDataView()
         test()
     }
@@ -126,12 +127,15 @@ class MainActivity : BaseActivity() {
                 24 -> RsaActivity.start(context)
                 25 -> TextActivity.start(context)
                 26 -> {
-                    //SmackActivity.start(getContext());
-                    val filesDir =
+                    SmackActivity.start(context);
+                   /* val filesDir =
                         File(getExternalFilesDir(null)!!.absolutePath + File.separator + "download")
                     if (!filesDir.exists()) {
                         filesDir.mkdirs()
-                    }
+                    }*/
+                }
+                27->{
+                    ScaleImageActivity.start(context)
                 }
                 else -> {
                 }

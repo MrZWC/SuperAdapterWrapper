@@ -74,7 +74,7 @@ dependencies {
     implementation 'org.apache.cordova:framework:9.0.0'
     implementation 'com.squareup.okhttp3:okhttp:3.12.5'
     implementation 'androidx.biometric:biometric:1.0.0-beta01'
-    implementation "androidx.core:core-ktx:+"
+    implementation 'com.tencent.imsdk:imsdk-plus:5.7.1435'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 repositories {

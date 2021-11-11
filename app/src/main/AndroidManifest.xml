@@ -37,7 +37,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="LockedOrientationActivity">
-        <activity android:name=".moudle.TestActivity"></activity>
+        <activity android:name=".moudle.ScaleImageActivity"></activity>
+        <activity android:name=".moudle.TestActivity" />
         <activity android:name=".moudle.SmackActivity" />
         <activity android:name=".moudle.TextActivity" />
         <activity android:name=".moudle.RsaActivity" />

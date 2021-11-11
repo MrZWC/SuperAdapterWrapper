@@ -10,7 +10,7 @@ import org.jivesoftware.smack.packet.Stanza;
  * Date: 2021/6/18 9:30
  * Description: 描述
  */
-public class MyStanzaListener<T extends Stanza> implements StanzaListener {
+public class MyStanzaListener implements StanzaListener {
     @Override
     public void processStanza(Stanza packet) throws SmackException.NotConnectedException, InterruptedException, SmackException.NotLoggedInException {
 
