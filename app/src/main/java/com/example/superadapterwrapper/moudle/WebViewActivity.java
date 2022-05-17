@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -24,9 +25,12 @@ import androidx.annotation.Nullable;
 
 import com.example.superadapterwrapper.R;
 import com.example.superadapterwrapper.base.BaseActivity;
+import com.google.gson.Gson;
+import com.idonans.lang.thread.Threads;
 import com.socks.library.KLog;
 
 import java.io.IOException;
+import java.util.Map;
 
 /**
  * Created by Android Studio.
@@ -67,6 +71,7 @@ public class WebViewActivity extends BaseActivity {
         webSettings.setPluginState(WebSettings.PluginState.ON);
         // 让WebView能够执行javaScript
         webSettings.setJavaScriptEnabled(true);
+        webSettings.setDomStorageEnabled(true);
         // 让JavaScript可以自动打开windows
         webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
         // 设置缓存
@@ -90,16 +95,41 @@ public class WebViewActivity extends BaseActivity {
         //mMyWebView.addJavascriptInterface(new InJavaScriptLocalObj(), "local_obj");
         mMyWebView.setWebViewClient(new MyWebChromeClient());
         mMyWebView.setWebChromeClient(new WebChromeClient());
-        String url = "http://124.161.87.43:8081/ynedut/third/auth/forwardPage.htm?version=V1.0&mobile=1&access_token=eyJqdGkiOiJ5bi1tZXNzYWdlIiwiaXNzIjoiMSIsImF1ZCI6IjEiLCJleHAiOjE1OTIzMDU5MTR9.xTtLaqth8DO729tXqwMRQvqzAHH7Uu0_VKDxzFKlwsNAtWKmdYGzFnX0DaV0N0P4zToiEytjxMYUWib90Ims9g&openId=3b25b415-4aef-4973-8d20-2d37f1cbd79c&urlStr=/handheldlearn/index.html";
-        String url1 = "https://zhidao.baidu.com/question/95254875.html";
-        String url2 = "http://124.161.87.43:8081/ynedut/handheldlearn/index.html";
-        String url3 = "http://10.6.30.117:8099/d/index.html";
-        String url4 = "file:///android_asset/www/indexlocalhtml.html";
-        String url5 = "http://10.6.30.62:63341/untitled/index.html";
-        String url6 = "https://h5.weijiangshi.cn/logintest/#/home?key=9b21ada0-efcf-4795-9ff0-57cc488af285-112";
-        String url7 = "https://liulanmi.com/labs/core.html";
-        String url8 = "https://yineng.s2.udesk.cn/im_client/?web_plugin_id=25969&agent_id=34269&group_id=28709";
-        mMyWebView.loadUrl(url8);
+
+        mMyWebView.loadUrl("http://10.6.30.70:8080/#/mobile");
+        mMyWebView.addJavascriptInterface(new JSObject(), "localJs");
+    }
+
+    class JSObject {
+        @JavascriptInterface
+        public void run(String method, String arguments, String function) {
+            KLog.d(method);
+            Map map = new Gson().fromJson(arguments, Map.class);
+            Threads.runOnUi(new Runnable() {
+                @Override
+                public void run() {
+                    int a = Integer.parseInt((String) map.get("a"));
+                    int b = Integer.parseInt((String) map.get("b"));
+                    int aa = a + b;
+                    mMyWebView.evaluateJavascript("(" + function + ")(" + aa + ")", null);
+                    //mMyWebView.evaluateJavascript("(function(data){alert(data)})(3333)", null);
+                    Handler handler = new Handler();
+                    Runnable runnable= new Runnable(){
+
+                       @Override
+                       public void run() {
+                           handler.postDelayed(this::run,1000);
+                       }
+                   };
+                    handler.postDelayed(runnable,1000);
+                }
+            });
+        }
+
+        @JavascriptInterface
+        public void subtraction() {
+
+        }
     }
 
     public class MyWebChromeClient extends WebViewClient {

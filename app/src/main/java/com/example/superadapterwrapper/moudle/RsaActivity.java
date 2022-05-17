@@ -12,8 +12,10 @@ import android.widget.TextView;
 import com.example.superadapterwrapper.R;
 import com.example.superadapterwrapper.base.BaseActivity;
 import com.example.superadapterwrapper.util.ImageGetterUtils;
+import com.example.superadapterwrapper.util.RSASignature;
 import com.example.superadapterwrapper.util.RsaUtil;
 import com.idonans.lang.Base64;
+import com.socks.library.KLog;
 
 public class RsaActivity extends BaseActivity {
     private EditText edit_text;
@@ -22,6 +24,7 @@ public class RsaActivity extends BaseActivity {
     private TextView encryption_text;
     private TextView decrypt_btn;
     private TextView decrypt_text;
+    private TextView sign_btn;
     private TextView html_text;
 
     public static void start(Context context) {
@@ -43,6 +46,7 @@ public class RsaActivity extends BaseActivity {
         encryption_text = findViewById(R.id.encryption_text);
         decrypt_btn = findViewById(R.id.decrypt_btn);
         decrypt_text = findViewById(R.id.decrypt_text);
+        sign_btn = findViewById(R.id.sign_btn);
         html_text = findViewById(R.id.html_text);
     }
 
@@ -88,6 +92,18 @@ public class RsaActivity extends BaseActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+            }
+        });
+        sign_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    String sing = RSASignature.INSTANCE.sign("test");
+                    KLog.i("RSASignature", sing);
+                } catch (Exception e) {
+
+                }
+
             }
         });
     }

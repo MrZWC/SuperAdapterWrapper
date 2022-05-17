@@ -57,6 +57,7 @@ class MainActivity : BaseActivity() {
         strings.add("TextView换行测试")
         strings.add("Smack测试")
         strings.add("大图查看")
+        strings.add("获取图片信息")
         ShowDataView()
         test()
     }
@@ -136,6 +137,9 @@ class MainActivity : BaseActivity() {
                 }
                 27->{
                     ScaleImageActivity.start(context)
+                }
+                28->{
+                    MediaInfoActivity.start(context)
                 }
                 else -> {
                 }

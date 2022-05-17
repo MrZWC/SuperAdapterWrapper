@@ -14,11 +14,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.superadapterwrapper.R;
 import com.example.superadapterwrapper.adapter.HappyAdapter;
 import com.example.superadapterwrapper.base.BaseActivity;
+import com.example.superadapterwrapper.base.bean.BaseBean;
+import com.example.superadapterwrapper.base.bean.TestBean;
 import com.example.superadapterwrapper.common.Constants;
 import com.example.superadapterwrapper.util.DeflaterUtils;
 import com.example.superadapterwrapper.util.DensityUtils;
 import com.example.superadapterwrapper.util.FileUtils;
 import com.example.superadapterwrapper.util.RDes;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.idonans.lang.util.ToastUtil;
 import com.socks.library.KLog;
 
@@ -71,6 +75,7 @@ public class HappyActivity extends BaseActivity {
         });
         mRecyclerView.setAdapter(mAdapter);
         startSearch();
+
     }
 
     @Override

@@ -91,13 +91,13 @@ public class RsaUtil {
      * @param privateKeyStr
      * @throws Exception
      */
-    public static void loadPrivateKey(String privateKeyStr) throws Exception {
+    public static RSAPrivateKey loadPrivateKey(String privateKeyStr) throws Exception {
         try {
             //byte[] buffer = EnDecryptionUtil.base64Decode(privateKeyStr);
             byte[] buffer = Base64.decode(privateKeyStr);
             PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(buffer);
             KeyFactory keyFactory = KeyFactory.getInstance("RSA");
-            privateKey = (RSAPrivateKey) keyFactory.generatePrivate(keySpec);
+            return (RSAPrivateKey) keyFactory.generatePrivate(keySpec);
         } catch (NoSuchAlgorithmException e) {
             throw new Exception("无此算法");
         } catch (InvalidKeySpecException e) {

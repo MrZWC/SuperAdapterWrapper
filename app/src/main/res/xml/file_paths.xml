@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?><!-- https://developer.android.com/reference/android/support/v4/content/FileProvider.html#SpecifyFiles -->
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- cordova.file.dataDirectory -->
+    <files-path
+        name="files"
+        path="." />
+
+    <!-- cordova.file.cacheDirectory -->
+    <cache-path
+        name="cache"
+        path="." />
+
+    <!-- cordova.file.externalDataDirectory -->
+    <external-files-path
+        name="external-files"
+        path="." />
+
+    <!-- cordova.file.externalCacheDirectory -->
+    <!--<external-cache-path name="external-cache" path="." />-->
+
+    <!-- cordova.file.externalRootDirectory -->
+    <external-path
+        name="external"
+        path="." />
+    <!-- /storage/emulated/0/Download/${applicationId}/.beta/apk-->
+    <external-path
+        name="beta_external_path"
+        path="Download/" />
+    <!--/storage/emulated/0/Android/data/${applicationId}/files/apk/-->
+    <external-path
+        name="beta_external_files_path"
+        path="Android/data/" />
+    <external-path
+        name="files_root"
+        path="storage/emulated/0/Android/data/${applicationId}/files/apk/" />
+    <external-path
+        name="external_storage_root"
+        path="." />
+
+    <external-path
+        name="external_storage_root"
+        path="." />
+</paths>
