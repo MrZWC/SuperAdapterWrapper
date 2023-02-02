@@ -11,6 +11,7 @@ import com.example.superadapterwrapper.databinding.ActivityServiceBinding
 
 class ServiceActivity : AppCompatActivity() {
     private lateinit var binding: ActivityServiceBinding
+    private var connection: ServiceConnection? = null
 
     companion object {
         const val TAG = "TestActivity"
@@ -27,19 +28,37 @@ class ServiceActivity : AppCompatActivity() {
         binding.startBtn.setOnClickListener {
             startMyService()
         }
+        binding.unbindBtn.setOnClickListener {
+            connection?.apply {
+                unbindService(connection!!)
+                connection=null
+            }
+        }
+        binding.resetBtn.setOnClickListener {
+            mService?.reset()
+        }
     }
 
+    private var mService: MyService? = null
     private fun startMyService() {
         val intent = Intent(this, MyService::class.java)
-        val connection = object : ServiceConnection {
+        connection = object : ServiceConnection {
             override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
+                if (service is MyService.MyBinder) {
+                    mService = service.getService()
+                    mService?.setOnTimerListener(object : MyService.OnTimerListener {
+                        override fun onTimer(num: Int) {
+                            binding.textBtn.text = num.toString()
+                        }
 
+                    })
+                }
             }
 
             override fun onServiceDisconnected(name: ComponentName?) {
             }
 
         }
-        bindService(intent, connection, Context.BIND_AUTO_CREATE)
+        bindService(intent, connection!!, Context.BIND_AUTO_CREATE)
     }
 }

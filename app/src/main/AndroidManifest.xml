@@ -39,7 +39,7 @@
         android:usesCleartextTraffic="true"
         tools:ignore="LockedOrientationActivity">
         <activity
-            android:name=".ServiceActivity"
+            android:name=".moudle.service.ServiceActivity"
             android:exported="false" />
         <activity android:name=".moudle.ScaleImageActivity" />
         <activity android:name=".moudle.TestActivity" />
@@ -142,6 +142,7 @@
             android:enabled="true"
             android:exported="true"
             android:process=":remote" />
+        <service android:name=".moudle.service.MyService" />
     </application>
 
 </manifest>

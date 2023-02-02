@@ -20,27 +20,43 @@ class MyService : Service() {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        startTimer()
+
         return super.onStartCommand(intent, flags, startId)
     }
 
     override fun onBind(intent: Intent?): IBinder? {
+        startTimer()
         return mBinder
     }
 
-    class MyBinder : Binder() {
-
+    override fun onUnbind(intent: Intent?): Boolean {
+        clear()
+        return super.onUnbind(intent)
     }
 
-    private fun startTimer() {
-        val timerTick = object : TimerTick(this) {
-            override fun onTick() {
-                num += 1
-                onTimerListener?.onTimer(num)
-            }
-
+    inner class MyBinder : Binder() {
+        fun getService(): MyService {
+            return this@MyService
         }
-        timerTick.start()
+    }
+
+    private fun clear() {
+        timerTick?.stop()
+        timerTick = null
+    }
+
+    private var timerTick: TimerTick? = null
+    private fun startTimer() {
+        if (timerTick == null) {
+            timerTick = object : TimerTick(this) {
+                override fun onTick() {
+                    num += 1
+                    onTimerListener?.onTimer(num)
+                }
+
+            }
+        }
+        timerTick?.start()
     }
 
     interface OnTimerListener {
