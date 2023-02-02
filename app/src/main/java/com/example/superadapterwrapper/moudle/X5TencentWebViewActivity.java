@@ -101,7 +101,8 @@ public class X5TencentWebViewActivity extends BaseActivity {
         webSettings.setJavaScriptEnabled(true);
         String url = "http://124.161.87.43:8081/ynedut/third/auth/forwardPage.htm?version=V1.0&mobile=1&access_token=eyJqdGkiOiJ5bi1tZXNzYWdlIiwiaXNzIjoiMSIsImF1ZCI6IjEiLCJleHAiOjE1OTIzMDU5MTR9.xTtLaqth8DO729tXqwMRQvqzAHH7Uu0_VKDxzFKlwsNAtWKmdYGzFnX0DaV0N0P4zToiEytjxMYUWib90Ims9g&openId=3b25b415-4aef-4973-8d20-2d37f1cbd79c&urlStr=/handheldlearn/index.html";
         String url1 = "https://zhidao.baidu.com/question/95254875.html";
-        String url2 = "http://124.161.87.43:8081/fs/resource/792445dd-1fa4-436e-836d-60a67a1d5dde/index.html";
+        //String url2 = "http://10.6.30.83:3000/#/class-control-panel";
+        String url2 = "http://debugx5.qq.com";
         /*if (mWebView.getX5WebViewExtension() != null) {
             Toast.makeText(this, "开启X5全屏播放模式", Toast.LENGTH_LONG).show();
             Bundle data = new Bundle();

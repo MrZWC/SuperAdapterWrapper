@@ -9,12 +9,11 @@ import com.example.superadapterwrapper.adapter.MainAdapter
 import com.example.superadapterwrapper.base.BaseActivity
 import com.example.superadapterwrapper.moudle.*
 import com.example.superadapterwrapper.moudle.audio.AudioActivity
+import com.example.superadapterwrapper.moudle.service.ServiceActivity
 import com.example.superadapterwrapper.util.DensityUtils
 import com.example.superadapterwrapper.util.FileDirManager
 import com.example.superadapterwrapper.util.UpdateH5Util
 import com.example.superadapterwrapper.util.ZipUtil
-import java.io.File
-import java.util.*
 import kotlin.collections.ArrayList
 
 class MainActivity : BaseActivity() {
@@ -58,6 +57,9 @@ class MainActivity : BaseActivity() {
         strings.add("Smack测试")
         strings.add("大图查看")
         strings.add("获取图片信息")
+        strings.add("系统数据库查询测试")
+        strings.add("测试")
+        strings.add("service")
         ShowDataView()
         test()
     }
@@ -129,17 +131,26 @@ class MainActivity : BaseActivity() {
                 25 -> TextActivity.start(context)
                 26 -> {
                     SmackActivity.start(context);
-                   /* val filesDir =
-                        File(getExternalFilesDir(null)!!.absolutePath + File.separator + "download")
-                    if (!filesDir.exists()) {
-                        filesDir.mkdirs()
-                    }*/
+                    /* val filesDir =
+                         File(getExternalFilesDir(null)!!.absolutePath + File.separator + "download")
+                     if (!filesDir.exists()) {
+                         filesDir.mkdirs()
+                     }*/
                 }
-                27->{
+                27 -> {
                     ScaleImageActivity.start(context)
                 }
-                28->{
+                28 -> {
                     MediaInfoActivity.start(context)
+                }
+                29 -> {
+                    SystemMediaTestActivity.start(context)
+                }
+                30 -> {
+                    TestActivity.start(context)
+                }
+                31 -> {
+                    ServiceActivity.start(context)
                 }
                 else -> {
                 }

@@ -4,7 +4,10 @@ import android.app.Application;
 import android.content.Context;
 import android.util.Log;
 
+import androidx.multidex.MultiDex;
+
 import com.tencent.smtt.sdk.QbSdk;
+import com.tencent.smtt.sdk.TbsListener;
 
 import org.jivesoftware.smack.XMPPConnection;
 import org.jivesoftware.smack.android.AndroidSmackInitializer;
@@ -22,6 +25,7 @@ public class SuperAppliction extends Application {
 
     @Override
     public void onCreate() {
+        MultiDex.install(this);
         super.onCreate();
         appliction = this;
         Timber.plant(new Timber.DebugTree());
@@ -42,6 +46,24 @@ public class SuperAppliction extends Application {
         };
         //x5内核初始化接口
         QbSdk.initX5Environment(getApplicationContext(), cb);
+        QbSdk.setDownloadWithoutWifi(true);
+        QbSdk.setTbsListener(new TbsListener() {
+            @Override
+            public void onDownloadFinish(int i) {
+
+            }
+
+            @Override
+            public void onInstallFinish(int i) {
+
+            }
+
+            @Override
+            public void onDownloadProgress(int i) {
+
+            }
+        });
+        QbSdk.disAllowThirdAppDownload();
     }
 
     public static SuperAppliction getApp() {

@@ -38,7 +38,10 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="LockedOrientationActivity">
-        <activity android:name=".moudle.ScaleImageActivity"/>
+        <activity
+            android:name=".ServiceActivity"
+            android:exported="false" />
+        <activity android:name=".moudle.ScaleImageActivity" />
         <activity android:name=".moudle.TestActivity" />
         <activity android:name=".moudle.SmackActivity" />
         <activity android:name=".moudle.TextActivity" />
@@ -62,8 +65,8 @@
 
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -129,6 +132,16 @@
         <activity android:name=".moudle.Camera2VideoNewActivity" />
         <activity android:name=".moudle.audio.AudioActivity" />
         <activity android:name=".moudle.MediaInfoActivity" />
+        <activity android:name=".moudle.Test2Activity" />
+        <activity
+            android:name=".moudle.SystemMediaTestActivity"
+            android:exported="false" />
+
+        <service
+            android:name=".aidl.PersonService"
+            android:enabled="true"
+            android:exported="true"
+            android:process=":remote" />
     </application>
 
 </manifest>

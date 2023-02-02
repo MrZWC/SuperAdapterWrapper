@@ -96,7 +96,8 @@ public class WebViewActivity extends BaseActivity {
         mMyWebView.setWebViewClient(new MyWebChromeClient());
         mMyWebView.setWebChromeClient(new WebChromeClient());
 
-        mMyWebView.loadUrl("http://10.6.30.70:8080/#/mobile");
+        //mMyWebView.loadUrl("https://dev.aixiaoyuan.cn/bpe/wap/#/process/result");
+        mMyWebView.loadUrl("file:///android_asset/www/YNBridgeHtml.html");
         mMyWebView.addJavascriptInterface(new JSObject(), "localJs");
     }
 
