@@ -1,2 +1,1 @@
 # SuperAdapterWrapper
-关于RecyclerView适配器的链式添加
