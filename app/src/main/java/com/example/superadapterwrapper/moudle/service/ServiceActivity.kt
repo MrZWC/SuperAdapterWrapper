@@ -1,13 +1,12 @@
 package com.example.superadapterwrapper.moudle.service
 
-import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.IBinder
+import androidx.appcompat.app.AppCompatActivity
 import com.example.superadapterwrapper.databinding.ActivityServiceBinding
+import com.example.superadapterwrapper.moudle.service.client.ClientActivity
 
 class ServiceActivity : AppCompatActivity() {
     private lateinit var binding: ActivityServiceBinding
@@ -25,40 +24,11 @@ class ServiceActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityServiceBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.startBtn.setOnClickListener {
-            startMyService()
+        binding.startBtn1.setOnClickListener {
+            ServiceBinderActivity.start(this)
         }
-        binding.unbindBtn.setOnClickListener {
-            connection?.apply {
-                unbindService(connection!!)
-                connection=null
-            }
+        binding.startBtn2.setOnClickListener {
+            ClientActivity.start(this)
         }
-        binding.resetBtn.setOnClickListener {
-            mService?.reset()
-        }
-    }
-
-    private var mService: MyService? = null
-    private fun startMyService() {
-        val intent = Intent(this, MyService::class.java)
-        connection = object : ServiceConnection {
-            override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
-                if (service is MyService.MyBinder) {
-                    mService = service.getService()
-                    mService?.setOnTimerListener(object : MyService.OnTimerListener {
-                        override fun onTimer(num: Int) {
-                            binding.textBtn.text = num.toString()
-                        }
-
-                    })
-                }
-            }
-
-            override fun onServiceDisconnected(name: ComponentName?) {
-            }
-
-        }
-        bindService(intent, connection!!, Context.BIND_AUTO_CREATE)
     }
 }

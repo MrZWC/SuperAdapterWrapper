@@ -39,6 +39,12 @@
         android:usesCleartextTraffic="true"
         tools:ignore="LockedOrientationActivity">
         <activity
+            android:name=".moudle.service.ServiceBinderActivity"
+            android:exported="false" />
+        <activity
+            android:name=".moudle.service.client.ClientActivity"
+            android:exported="false" />
+        <activity
             android:name=".moudle.service.ServiceActivity"
             android:exported="false" />
         <activity android:name=".moudle.ScaleImageActivity" />

@@ -9,27 +9,26 @@
     tools:context=".moudle.service.ServiceActivity">
 
     <Button
-        android:id="@+id/start_btn1"
+        android:id="@+id/start_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="通过bindService自身的binder通信" />
+        android:text="启动服务" />
+    <Button
+        android:id="@+id/unbind_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="解绑服务" />
 
     <Button
-        android:id="@+id/start_btn2"
+        android:id="@+id/reset_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="通过手写AIDL通信" />
+        android:text="重置计数" />
 
     <Button
-        android:id="@+id/start_btn3"
+        android:id="@+id/text_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="通过AIDL通信" />
-
-    <Button
-        android:id="@+id/start_btn4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="通过ManagerService通信" />
+        android:text="" />
 
 </LinearLayout>
