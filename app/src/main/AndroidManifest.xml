@@ -148,6 +148,11 @@
             android:enabled="true"
             android:exported="true"
             android:process=":remote" />
+        <service
+            android:name=".moudle.service.server.RemoteService"
+            android:enabled="true"
+            android:exported="true"
+            android:process=":remote" />
         <service android:name=".moudle.service.MyService" />
     </application>
 

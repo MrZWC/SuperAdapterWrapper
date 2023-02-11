@@ -6,6 +6,7 @@ import android.util.Log;
 
 import androidx.multidex.MultiDex;
 
+import com.socks.library.KLog;
 import com.tencent.smtt.sdk.QbSdk;
 import com.tencent.smtt.sdk.TbsListener;
 
@@ -64,6 +65,7 @@ public class SuperAppliction extends Application {
             }
         });
         QbSdk.disAllowThirdAppDownload();
+        KLog.i("SuperAppliction","onCreate");
     }
 
     public static SuperAppliction getApp() {

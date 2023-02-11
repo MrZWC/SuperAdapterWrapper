@@ -13,6 +13,11 @@ public class Book implements Parcelable {
     private int price;
     private String name;
 
+    public Book(int price, String name) {
+        this.price = price;
+        this.name = name;
+    }
+
     public Book() {
     }
 
@@ -58,5 +63,13 @@ public class Book implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(price);
         dest.writeString(name);
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "price=" + price +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

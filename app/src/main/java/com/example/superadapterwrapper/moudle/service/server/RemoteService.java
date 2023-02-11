@@ -39,6 +39,16 @@ public class RemoteService extends Service {
         return bookManager;
     }
 
+    @Override
+    public boolean onUnbind(Intent intent) {
+        return super.onUnbind(intent);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
+
     private final Stub bookManager = new Stub() {
         @Override
         public List<Book> getBooks() throws RemoteException {
