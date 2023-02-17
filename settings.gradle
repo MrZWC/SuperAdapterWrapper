@@ -10,3 +10,6 @@ dependencyResolutionManagement {
 include ':app', ':layoutmanagerlib'
 rootProject.name='SuperAdapterWrapper'
 include ':smackLibrary'
+include ':mylibrary1'
+include ':mylibrary2'
+include ':mylibrary26'

@@ -61,6 +61,7 @@ public class Camera2VideoActivity extends BaseActivity {
     private CaptureRequest mPreviewRequest;
     private CaptureRequest recordRequest;
     private static final int RECORDER_VIDEO_BITRATE = 10_000_000;
+
     private long recordingStartMillis = 0L;
     private OrientationLiveData relativeOrientation;
     private static final String TAG_PREVIEW = "预览";

@@ -74,8 +74,6 @@ public class WebViewActivity extends BaseActivity {
         webSettings.setDomStorageEnabled(true);
         // 让JavaScript可以自动打开windows
         webSettings.setJavaScriptCanOpenWindowsAutomatically(true);
-        // 设置缓存
-        webSettings.setAppCacheEnabled(true);
         // 设置缓存模式,一共有四种模式
         webSettings.setCacheMode(webSettings.LOAD_CACHE_ELSE_NETWORK);
         // 设置缓存路径

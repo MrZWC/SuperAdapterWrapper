@@ -27,6 +27,7 @@ class ServiceActivity : AppCompatActivity() {
         binding.startBtn1.setOnClickListener {
             ServiceBinderActivity.start(this)
         }
+
         binding.startBtn2.setOnClickListener {
             ClientActivity.start(this)
         }
