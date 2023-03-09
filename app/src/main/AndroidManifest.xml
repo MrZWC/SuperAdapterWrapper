@@ -38,6 +38,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="LockedOrientationActivity">
+
         <activity
             android:name=".moudle.service.ServiceBinderActivity"
             android:exported="false" />
@@ -142,6 +143,10 @@
         <activity
             android:name=".moudle.SystemMediaTestActivity"
             android:exported="false" />
+        <activity
+            android:name=".moudle.executor.ExecutorActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
 
         <service
             android:name=".aidl.PersonService"
@@ -153,7 +158,9 @@
             android:enabled="true"
             android:exported="true"
             android:process=":remote" />
-        <service android:name=".moudle.service.MyService" />
+        <service
+            android:name=".moudle.service.MyService"
+            android:process=":remote" />
     </application>
 
 </manifest>

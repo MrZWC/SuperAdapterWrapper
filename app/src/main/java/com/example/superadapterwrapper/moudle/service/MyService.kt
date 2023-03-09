@@ -4,7 +4,11 @@ import android.app.Service
 import android.content.Intent
 import android.os.Binder
 import android.os.IBinder
+import com.example.superadapterwrapper.ITestCallBack
+import com.example.superadapterwrapper.ITestInterface
 import com.example.superadapterwrapper.util.TimerTick
+import java.io.FileDescriptor
+import java.io.PrintWriter
 
 /**
  * ClassName MyService
@@ -13,14 +17,19 @@ import com.example.superadapterwrapper.util.TimerTick
  * Description: 描述
  */
 class MyService : Service() {
-    private val mBinder = MyBinder()
+    private val mBinder = object : ITestInterface.Stub() {
+        override fun registerCalback(callback: ITestCallBack?) {
+            mCallback = callback
+        }
+
+    }
     private var num = 0
+    private var mCallback: ITestCallBack? = null
     override fun onCreate() {
         super.onCreate()
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-
         return super.onStartCommand(intent, flags, startId)
     }
 
@@ -34,11 +43,10 @@ class MyService : Service() {
         return super.onUnbind(intent)
     }
 
-    inner class MyBinder : Binder() {
-        fun getService(): MyService {
-            return this@MyService
-        }
+    override fun dump(fd: FileDescriptor?, writer: PrintWriter?, args: Array<out String>?) {
+        TODO("Not yet implemented")
     }
+
 
     private fun clear() {
         timerTick?.stop()
@@ -51,7 +59,7 @@ class MyService : Service() {
             timerTick = object : TimerTick(this) {
                 override fun onTick() {
                     num += 1
-                    onTimerListener?.onTimer(num)
+                    mCallback?.setNum(num)
                 }
 
             }

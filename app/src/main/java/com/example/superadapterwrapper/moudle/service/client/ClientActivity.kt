@@ -7,6 +7,7 @@ import android.content.ServiceConnection
 import android.os.Bundle
 import android.os.IBinder
 import androidx.appcompat.app.AppCompatActivity
+import com.example.superadapterwrapper.SuperAppliction
 import com.example.superadapterwrapper.databinding.ActivityClientBinding
 import com.example.superadapterwrapper.moudle.service.Book
 import com.example.superadapterwrapper.moudle.service.server.BookManager
@@ -30,7 +31,9 @@ class ClientActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityClientBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        attemptToBindService()
+        binding.bindBtn.setOnClickListener {
+            attemptToBindService()
+        }
         binding.btn.setOnClickListener {
             if (bookManager == null) {
                 return@setOnClickListener
@@ -41,11 +44,13 @@ class ClientActivity : AppCompatActivity() {
 
     private val serviceConnection = object : ServiceConnection {
         override fun onServiceConnected(name: ComponentName, service: IBinder) {
+            KLog.i(TAG, "onServiceConnected")
             bookManager = Stub.asInterface(service)
             if (bookManager != null) {
                 val books = bookManager?.books
                 KLog.i(TAG, books.toString())
             }
+            binding.btn.setText("添加")
         }
 
         override fun onServiceDisconnected(name: ComponentName?) {
@@ -55,11 +60,13 @@ class ClientActivity : AppCompatActivity() {
 
     private fun attemptToBindService() {
         val intent = Intent(this, RemoteService::class.java)
-        bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE)
+        SuperAppliction.getApp().bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE)
+        //SuperAppliction.getApp().bindService()
+        //startService(intent)
     }
 
     override fun onDestroy() {
-        unbindService(serviceConnection)
+        //unbindService(serviceConnection)
         super.onDestroy()
     }
 }

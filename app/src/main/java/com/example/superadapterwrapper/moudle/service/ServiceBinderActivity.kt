@@ -5,20 +5,26 @@ import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
 import android.os.Bundle
+import android.os.Handler
 import android.os.IBinder
+import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
+import com.example.superadapterwrapper.ITestCallBack
+import com.example.superadapterwrapper.ITestInterface
 import com.example.superadapterwrapper.databinding.ActivityServiceBinderBinding
 
 class ServiceBinderActivity : AppCompatActivity() {
     private lateinit var binding: ActivityServiceBinderBinding
     private var connection: ServiceConnection? = null
     private val TAG = this.javaClass.simpleName
+
     companion object {
         fun start(context: Context) {
             val intent = Intent(context, ServiceBinderActivity::class.java)
             context.startActivity(intent)
         }
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityServiceBinderBinding.inflate(layoutInflater)
@@ -29,7 +35,7 @@ class ServiceBinderActivity : AppCompatActivity() {
         binding.unbindBtn.setOnClickListener {
             connection?.apply {
                 unbindService(connection!!)
-                connection=null
+                connection = null
             }
         }
         binding.resetBtn.setOnClickListener {
@@ -42,15 +48,15 @@ class ServiceBinderActivity : AppCompatActivity() {
         val intent = Intent(this, MyService::class.java)
         connection = object : ServiceConnection {
             override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
-                if (service is MyService.MyBinder) {
-                    mService = service.getService()
-                    mService?.setOnTimerListener(object : MyService.OnTimerListener {
-                        override fun onTimer(num: Int) {
+                val asInterface = ITestInterface.Stub.asInterface(service)
+                asInterface.registerCalback(object : ITestCallBack.Stub() {
+                    override fun setNum(num: Int) {
+                        Handler(Looper.getMainLooper()).post{
                             binding.textBtn.text = num.toString()
                         }
+                    }
 
-                    })
-                }
+                })
             }
 
             override fun onServiceDisconnected(name: ComponentName?) {

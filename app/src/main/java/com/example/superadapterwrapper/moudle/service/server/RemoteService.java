@@ -7,6 +7,7 @@ import android.os.RemoteException;
 import android.util.Log;
 
 import com.example.superadapterwrapper.moudle.service.Book;
+import com.socks.library.KLog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +19,7 @@ import java.util.List;
  * Description: 描述
  */
 public class RemoteService extends Service {
-
+    private String TAG=this.getClass().getSimpleName();
     private List<Book> books = new ArrayList<>();
 
     public RemoteService() {
@@ -26,8 +27,8 @@ public class RemoteService extends Service {
 
     @Override
     public void onCreate() {
+        KLog.i(TAG,"onCreate");
         super.onCreate();
-
         Book book = new Book();
         book.setName("三体");
         book.setPrice(88);
@@ -35,17 +36,37 @@ public class RemoteService extends Service {
     }
 
     @Override
+    public void onStart(Intent intent, int startId) {
+        super.onStart(intent, startId);
+    }
+
+    @Override
     public IBinder onBind(Intent intent) {
+        KLog.i(TAG,"onBind");
         return bookManager;
     }
 
     @Override
     public boolean onUnbind(Intent intent) {
+        KLog.i(TAG,"onUnbind");
         return super.onUnbind(intent);
     }
 
     @Override
+    public void onRebind(Intent intent) {
+        KLog.i(TAG,"onRebind");
+        super.onRebind(intent);
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        KLog.i(TAG,"onStartCommand");
+        return super.onStartCommand(intent, flags, startId);
+    }
+
+    @Override
     public void onDestroy() {
+        KLog.i(TAG,"onDestroy");
         super.onDestroy();
     }
 

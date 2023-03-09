@@ -4,13 +4,19 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.view.MotionEvent
+import android.view.WindowManager
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import com.example.superadapterwrapper.R
+import com.example.superadapterwrapper.SuperAppliction
+import com.example.superadapterwrapper.databinding.ActivityTestBinding
 import com.google.gson.Gson
 import com.socks.library.KLog
 
 class TestActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityTestBinding
+
     companion object {
         const val TAG = "TestActivity"
         fun start(context: Context) {
@@ -21,10 +27,33 @@ class TestActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_test)
+        binding = ActivityTestBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         KLog.i(TAG, "onCreate")
-        findViewById<Button>(R.id.start_btn).setOnClickListener {
-            Test2Activity.start(this)
+       /* binding.startBtn.setOnClickListener {
+            KLog.i("btn", "")
+        }*/
+        binding.layoutBtn.setOnClickListener {
+            KLog.i("layout", "startBtn="+binding.startBtn.isClickable)
+
+        }
+        binding.layoutBtn.setOnTouchListener { v, event ->
+            when(event.action){
+                MotionEvent.ACTION_DOWN->{
+                    KLog.i("TestActivity","ACTION_DOWN")
+                }
+                 MotionEvent.ACTION_MOVE->{
+                    KLog.i("TestActivity","ACTION_MOVE")
+                }
+                 MotionEvent.ACTION_UP->{
+                    KLog.i("TestActivity","ACTION_UP")
+                }
+                 MotionEvent.ACTION_CANCEL->{
+                    KLog.i("TestActivity","ACTION_CANCEL")
+                }
+
+            }
+            return@setOnTouchListener false
         }
     }
 

@@ -9,6 +9,7 @@ import com.example.superadapterwrapper.adapter.MainAdapter
 import com.example.superadapterwrapper.base.BaseActivity
 import com.example.superadapterwrapper.moudle.*
 import com.example.superadapterwrapper.moudle.audio.AudioActivity
+import com.example.superadapterwrapper.moudle.executor.ExecutorActivity
 import com.example.superadapterwrapper.moudle.service.ServiceActivity
 import com.example.superadapterwrapper.util.DensityUtils
 import com.example.superadapterwrapper.util.FileDirManager
@@ -60,6 +61,7 @@ class MainActivity : BaseActivity() {
         strings.add("系统数据库查询测试")
         strings.add("测试")
         strings.add("service")
+        strings.add("线程池")
         ShowDataView()
         test()
     }
@@ -151,6 +153,9 @@ class MainActivity : BaseActivity() {
                 }
                 31 -> {
                     ServiceActivity.start(context)
+                }
+                32 -> {
+                    ExecutorActivity.start(context)
                 }
                 else -> {
                 }

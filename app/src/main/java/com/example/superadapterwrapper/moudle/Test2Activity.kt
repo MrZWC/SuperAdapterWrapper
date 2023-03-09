@@ -1,5 +1,6 @@
 package com.example.superadapterwrapper.moudle
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -11,7 +12,7 @@ import com.socks.library.KLog
 class Test2Activity : AppCompatActivity() {
     companion object {
         const val TAG = "Test2Activity"
-        fun start(context: Context) {
+        fun start(context: Activity) {
             val intent = Intent(context, Test2Activity::class.java)
             context.startActivity(intent)
         }

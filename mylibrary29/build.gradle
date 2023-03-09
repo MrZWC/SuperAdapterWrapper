@@ -4,12 +4,12 @@ plugins {
 }
 
 android {
-    namespace 'com.example.mylibrary26'
-    compileSdk 26
+    namespace 'com.yineng.mylibrary29'
+    compileSdk 29
 
     defaultConfig {
-        minSdk 21
-        targetSdk 26
+        minSdk 23
+        targetSdk 29
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
