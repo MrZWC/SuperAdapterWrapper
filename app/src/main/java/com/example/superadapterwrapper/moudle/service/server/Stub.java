@@ -6,9 +6,6 @@ import android.os.IInterface;
 import android.os.Parcel;
 import android.os.RemoteException;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import com.example.superadapterwrapper.moudle.service.Book;
 import com.example.superadapterwrapper.moudle.service.proxy.Proxy;
 

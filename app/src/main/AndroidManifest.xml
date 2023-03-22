@@ -147,7 +147,10 @@
             android:name=".moudle.executor.ExecutorActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
-
+        <activity
+            android:name=".moudle.sensor.SensorActivity"
+            android:screenOrientation="portrait"
+            android:exported="false" />
         <service
             android:name=".aidl.PersonService"
             android:enabled="true"
