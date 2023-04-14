@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 
 import com.example.superadapterwrapper.R;
@@ -40,5 +41,10 @@ public class SensorView extends View {
         canvas.drawBitmap(back, 0, 0, null);
         // 根据气泡坐标绘制气泡
         canvas.drawBitmap(bubble, bubbleX, bubbleY, null);
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        return super.dispatchTouchEvent(event);
     }
 }

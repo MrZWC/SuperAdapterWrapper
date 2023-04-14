@@ -12,11 +12,11 @@ import com.example.superadapterwrapper.moudle.audio.AudioActivity
 import com.example.superadapterwrapper.moudle.executor.ExecutorActivity
 import com.example.superadapterwrapper.moudle.sensor.SensorActivity
 import com.example.superadapterwrapper.moudle.service.ServiceActivity
+import com.example.superadapterwrapper.moudle.view.ViewActivity
 import com.example.superadapterwrapper.util.DensityUtils
 import com.example.superadapterwrapper.util.FileDirManager
 import com.example.superadapterwrapper.util.UpdateH5Util
 import com.example.superadapterwrapper.util.ZipUtil
-import kotlin.collections.ArrayList
 
 class MainActivity : BaseActivity() {
     var mRecyclerView: RecyclerView? = null
@@ -64,6 +64,7 @@ class MainActivity : BaseActivity() {
         strings.add("service")
         strings.add("线程池")
         strings.add("水平仪")
+        strings.add("view绘制")
         ShowDataView()
         test()
     }
@@ -161,6 +162,9 @@ class MainActivity : BaseActivity() {
                 }
                 33 -> {
                     SensorActivity.start(context)
+                }
+                34 -> {
+                    ViewActivity.start(context)
                 }
                 else -> {
                 }

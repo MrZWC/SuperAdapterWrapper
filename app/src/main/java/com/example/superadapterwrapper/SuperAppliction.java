@@ -2,8 +2,11 @@ package com.example.superadapterwrapper;
 
 import android.app.Application;
 import android.content.Context;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.multidex.MultiDex;
 
 import com.socks.library.KLog;
@@ -23,6 +26,11 @@ import timber.log.Timber;
  */
 public class SuperAppliction extends Application {
     private static SuperAppliction appliction;
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+    }
 
     @Override
     public void onCreate() {
@@ -76,4 +84,5 @@ public class SuperAppliction extends Application {
     public Context getApplicationContext() {
         return super.getApplicationContext();
     }
+
 }
