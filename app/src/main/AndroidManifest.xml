@@ -52,7 +52,9 @@
             android:name=".moudle.service.ServiceActivity"
             android:exported="false" />
         <activity android:name=".moudle.ScaleImageActivity" />
-        <activity android:name=".moudle.TestActivity" />
+        <activity
+            android:name=".moudle.TestActivity"
+            android:launchMode="singleInstance" />
         <activity android:name=".moudle.SmackActivity" />
         <activity android:name=".moudle.TextActivity" />
         <activity android:name=".moudle.RsaActivity" />

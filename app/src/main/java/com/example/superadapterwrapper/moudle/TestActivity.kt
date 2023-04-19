@@ -30,9 +30,10 @@ class TestActivity : AppCompatActivity() {
         binding = ActivityTestBinding.inflate(layoutInflater)
         setContentView(binding.root)
         KLog.i(TAG, "onCreate")
-       /* binding.startBtn.setOnClickListener {
+        binding.startBtn.setOnClickListener {
             KLog.i("btn", "")
-        }*/
+            Test2Activity.start(this)
+        }
         binding.layoutBtn.setOnClickListener {
             KLog.i("layout", "startBtn="+binding.startBtn.isClickable)
 
@@ -58,46 +59,51 @@ class TestActivity : AppCompatActivity() {
     }
 
     override fun onStart() {
-        super.onStart()
         KLog.i(TAG, "onStart")
+        super.onStart()
     }
 
     override fun onResume() {
-        super.onResume()
         KLog.i(TAG, "onResume")
+        super.onResume()
     }
 
     override fun onRestart() {
-        super.onRestart()
         KLog.i(TAG, "onRestart")
+        super.onRestart()
     }
 
     override fun onPause() {
-        super.onPause()
         KLog.i(TAG, "onPause")
+        super.onPause()
     }
 
     override fun onStop() {
-        super.onStop()
         KLog.i(TAG, "onStop")
+        super.onStop()
     }
 
     override fun onDestroy() {
-        super.onDestroy()
         KLog.i(TAG, "onDestroy")
+        super.onDestroy()
     }
 
+    override fun onNewIntent(intent: Intent?) {
+        KLog.i(TAG, "onNewIntent")
+        super.onNewIntent(intent)
+    }
     override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
         KLog.i(TAG, "onSaveInstanceState")
+        super.onSaveInstanceState(outState)
     }
 
     override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
         super.onSaveInstanceState(outState, outPersistentState)
+        KLog.i(TAG, "onSaveInstanceState")
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-        super.onRestoreInstanceState(savedInstanceState)
         KLog.i(TAG, "onRestoreInstanceState")
+        super.onRestoreInstanceState(savedInstanceState)
     }
 }

@@ -1,15 +1,17 @@
 package com.example.superadapterwrapper.moudle
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.PersistableBundle
+import androidx.appcompat.app.AppCompatActivity
 import com.example.superadapterwrapper.R
+import com.example.superadapterwrapper.databinding.ActivityTest2Binding
+import com.example.superadapterwrapper.databinding.ActivityTestBinding
 import com.socks.library.KLog
 
 class Test2Activity : AppCompatActivity() {
+    private lateinit var binding: ActivityTest2Binding
     companion object {
         const val TAG = "Test2Activity"
         fun start(context: Activity) {
@@ -19,8 +21,12 @@ class Test2Activity : AppCompatActivity() {
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_test2)
+        binding = ActivityTest2Binding.inflate(layoutInflater)
+        setContentView(binding.root)
         KLog.i(TAG,"onCreate")
+        binding.startBtn.setOnClickListener{
+            TestActivity.start(this)
+        }
     }
 
     override fun onStart() {
@@ -60,6 +66,7 @@ class Test2Activity : AppCompatActivity() {
 
     override fun onSaveInstanceState(outState: Bundle, outPersistentState: PersistableBundle) {
         super.onSaveInstanceState(outState, outPersistentState)
+        KLog.i(TAG,"onSaveInstanceState")
     }
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
