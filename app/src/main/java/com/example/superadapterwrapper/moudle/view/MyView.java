@@ -27,13 +27,6 @@ public class MyView extends View {
 
     public MyView(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
-        invalidate();
-        setOnTouchListener(new OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return false;
-            }
-        });
     }
 
     @Override
@@ -61,6 +54,10 @@ public class MyView extends View {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        KLog.i(MotionEvent.actionToString(event.getAction()));
+        if (event.getAction()== MotionEvent.ACTION_DOWN) {
+            return true;
+        }
         return super.onTouchEvent(event);
     }
 }

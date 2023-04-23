@@ -18,6 +18,7 @@ import androidx.annotation.RequiresApi
 import com.example.superadapterwrapper.SuperAppliction
 import com.example.superadapterwrapper.base.BaseActivity
 import com.example.superadapterwrapper.databinding.ActivityViewBinding
+import com.socks.library.KLog
 
 class ViewActivity : BaseActivity() {
     private var binding: ActivityViewBinding? = null
@@ -43,7 +44,7 @@ class ViewActivity : BaseActivity() {
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun initData(savedInstanceState: Bundle?) {
-        binding?.showWindowBtn?.setOnClickListener {
+       /* binding?.showWindowBtn?.setOnClickListener {
             if (!Settings.canDrawOverlays(this)) {
                 val intent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION)
                 intent.data = Uri.parse("package:$packageName")
@@ -51,13 +52,17 @@ class ViewActivity : BaseActivity() {
             } else {
                 showView()
             }
-        }
-        binding?.myView?.setOnTouchListener(object : OnTouchListener {
-            override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+        }*/
+      /*  binding?.myView?.setOnTouchListener(object : OnTouchListener {
+            override fun onTouch(v: View?, event: MotionEvent): Boolean {
+                KLog.i("ViewActivity",MotionEvent.actionToString(event!!.action))
                 return false
             }
 
-        })
+        })*/
+        binding?.myView?.setOnClickListener {
+            KLog.i("ViewActivity","onclick")
+        }
     }
 
     private fun showView() {
@@ -89,5 +94,9 @@ class ViewActivity : BaseActivity() {
 
         //将textView添加到WindowManager
         wm.addView(textView, layoutParams)
+    }
+
+    override fun onTouchEvent(event: MotionEvent?): Boolean {
+        return super.onTouchEvent(event)
     }
 }

@@ -38,7 +38,7 @@ class ClientActivity : AppCompatActivity() {
             if (bookManager == null) {
                 return@setOnClickListener
             }
-            bookManager!!.addBook(Book(1001, "编码"))
+            bookManager?.addBook(Book(1001, "编码"))
         }
     }
 

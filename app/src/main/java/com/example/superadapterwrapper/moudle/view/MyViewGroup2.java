@@ -3,9 +3,7 @@ package com.example.superadapterwrapper.moudle.view;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.ScrollView;
 
 import com.socks.library.KLog;
 
@@ -14,20 +12,20 @@ import com.socks.library.KLog;
  * DAte:2023/3/2 10:26
  * Description:描述
  */
-public class MyViewGroup extends FrameLayout {
-    public MyViewGroup(Context context) {
+public class MyViewGroup2 extends FrameLayout {
+    public MyViewGroup2(Context context) {
         super(context);
     }
 
-    public MyViewGroup(Context context, AttributeSet attrs) {
+    public MyViewGroup2(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public MyViewGroup(Context context, AttributeSet attrs, int defStyleAttr) {
+    public MyViewGroup2(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
-    public MyViewGroup(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public MyViewGroup2(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
@@ -44,9 +42,6 @@ public class MyViewGroup extends FrameLayout {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        if (ev.getAction()!=MotionEvent.ACTION_DOWN){
-            return true;
-        }
         return super.onInterceptTouchEvent(ev);
     }
 
