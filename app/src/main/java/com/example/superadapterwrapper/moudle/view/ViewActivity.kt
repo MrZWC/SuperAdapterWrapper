@@ -60,9 +60,9 @@ class ViewActivity : BaseActivity() {
             }
 
         })*/
-        binding?.myView?.setOnClickListener {
+       /* binding?.myView?.setOnClickListener {
             KLog.i("ViewActivity","onclick")
-        }
+        }*/
     }
 
     private fun showView() {

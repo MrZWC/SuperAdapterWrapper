@@ -7,34 +7,15 @@
     android:orientation="vertical"
     tools:context=".moudle.view.ViewActivity">
 
-    <com.example.superadapterwrapper.moudle.view.MyViewGroup
+    <com.example.superadapterwrapper.moudle.view.AutoLinearLayout
         android:layout_width="match_parent"
-        android:layout_weight="1"
-        android:layout_height="match_parent"
-        android:background="@color/actionBar_bg_blue">
+        android:background="@color/actionBar_bg_blue"
+        android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <com.example.superadapterwrapper.moudle.view.MyView
-                android:id="@+id/my_view"
-                android:layout_width="wrap_content"
-                android:layout_height="100dp"
-                android:layout_gravity="center"
-                android:background="@color/colorAccent" />
-        </LinearLayout>
-    </com.example.superadapterwrapper.moudle.view.MyViewGroup>
-    <!-- <com.example.superadapterwrapper.moudle.view.MyView
-         android:id="@+id/my_view"
-         android:layout_width="wrap_content"
-         android:layout_gravity="center"
-         android:layout_height="100dp"
-         android:background="@color/colorAccent" />-->
-    <com.example.superadapterwrapper.moudle.view.MyViewGroup2
-        android:layout_width="match_parent"
-        android:layout_weight="1"
-        android:layout_height="match_parent"
-        android:background="@color/black">
-    </com.example.superadapterwrapper.moudle.view.MyViewGroup2>
+        <TextView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:text="sssss"
+            android:textColor="@color/black" />
+    </com.example.superadapterwrapper.moudle.view.AutoLinearLayout>
 </LinearLayout>

@@ -31,7 +31,6 @@ class TestActivity : AppCompatActivity() {
         setContentView(binding.root)
         KLog.i(TAG, "onCreate")
         binding.startBtn.setOnClickListener {
-            KLog.i("btn", "")
             Test2Activity.start(this)
         }
         binding.layoutBtn.setOnClickListener {
