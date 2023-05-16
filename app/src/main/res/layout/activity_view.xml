@@ -8,14 +8,62 @@
     tools:context=".moudle.view.ViewActivity">
 
     <com.example.superadapterwrapper.moudle.view.AutoLinearLayout
-        android:layout_width="match_parent"
-        android:background="@color/actionBar_bg_blue"
-        android:layout_height="wrap_content">
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:background="@color/actionBar_bg_blue">
 
-        <TextView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:text="sssss"
-            android:textColor="@color/black" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#FF8247"
+            android:padding="20dip"
+            android:text="按钮1"
+            android:textColor="#ffffff"
+            android:textSize="20dip" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#8B0A50"
+            android:padding="10dip"
+            android:text="按钮2222222222222"
+            android:textColor="#ffffff"
+            android:textSize="20dip" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#7CFC00"
+            android:padding="15dip"
+            android:text="按钮333333"
+            android:textColor="#ffffff"
+            android:textSize="20dip" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#1E90FF"
+            android:padding="10dip"
+            android:text="按钮44"
+            android:textColor="#ffffff"
+            android:textSize="10dip" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#191970"
+            android:padding="15dip"
+            android:text="按钮5"
+            android:textColor="#ffffff"
+            android:textSize="20dip" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#7A67EE"
+            android:padding="30dip"
+            android:text="按钮6555"
+            android:textColor="#ffffff"
+            android:textSize="20dip" />
+
     </com.example.superadapterwrapper.moudle.view.AutoLinearLayout>
 </LinearLayout>
