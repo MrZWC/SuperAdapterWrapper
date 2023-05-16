@@ -88,11 +88,11 @@ class AutoLinearLayout : ViewGroup {
     /**
      * 为所有的子控件摆放位置.
      */
-    override fun onLayout(changed: Boolean, left: Int, top: Int, right: Int, bottom: Int) {
-        var left = left
-        var top = top
-        var right = right
-        var bottom = bottom
+    override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
+        var left = l
+        var top = t
+        var right = r
+        var bottom = b
         val count = childCount
         var childMeasureWidth = 0
         var childMeasureHeight = 0
